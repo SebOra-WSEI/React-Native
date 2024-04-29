@@ -1,39 +1,35 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, SafeAreaView, StatusBar } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 
-const attributes = [
-  'character',
-  'location',
-  'episode',
-];
+const attributes = ['character', 'location', 'episode'];
 
 interface ItemProps {
-  title: string
-  setAttribute: (value: string) => void
+  title: string;
+  setAttribute: (value: string) => void;
 }
 
-const Item = ({
-  title,
-  setAttribute
-}: ItemProps) => {
-  const displayedTitle = title[0].toUpperCase() + title.slice(1)
+const Item = ({ title, setAttribute }: ItemProps) => {
+  const displayedTitle = title[0].toUpperCase() + title.slice(1);
 
   return (
     <View style={styles.item}>
-      <Text
-        style={styles.itemTitle}
-        onPress={() => setAttribute(title)}
-      >
+      <Text style={styles.itemTitle} onPress={() => setAttribute(title)}>
         {displayedTitle}
       </Text>
     </View>
   );
-}
+};
 
 export default function TabTwoScreen() {
   const [attribute, setAttribute] = useState<string>('');
-  console.log(attribute)
-
+  console.log(attribute);
 
   return (
     <View style={styles.container}>
@@ -41,8 +37,10 @@ export default function TabTwoScreen() {
       <FlatList
         style={styles.flatList}
         data={attributes}
-        renderItem={({ item }) => <Item title={item} setAttribute={setAttribute} />}
-        keyExtractor={item => item}
+        renderItem={({ item }) => (
+          <Item title={item} setAttribute={setAttribute} />
+        )}
+        keyExtractor={(item) => item}
       />
     </View>
   );
@@ -67,13 +65,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     shadowColor: '#000',
     shadowOpacity: 0.06,
-
   },
   itemTitle: {
     fontSize: 32,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   flatList: {
-    marginTop: 40
-  }
+    marginTop: 40,
+  },
 });

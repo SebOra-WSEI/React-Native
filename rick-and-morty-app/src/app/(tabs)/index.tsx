@@ -10,7 +10,7 @@ export default function TabOneScreen() {
           <Text style={styles.getStarted}>Get started!</Text>
         </Link>
       </View>
-    </View >
+    </View>
   );
 }
 
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
   },
   getStarted: {
     fontSize: 18,
-    color: '#00b4d8'
-  }
+    color: '#00b4d8',
+  },
 });
