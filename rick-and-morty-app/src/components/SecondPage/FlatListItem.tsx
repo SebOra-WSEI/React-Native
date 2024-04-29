@@ -1,9 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable
-} from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 
 interface FlatListItemProps {
@@ -13,15 +8,13 @@ interface FlatListItemProps {
 
 export const FlatListItem: React.FC<FlatListItemProps> = ({
   title,
-  setAttribute
+  setAttribute,
 }) => {
   const displayedTitle = title[0].toUpperCase() + title.slice(1);
 
   return (
     <Pressable style={styles.item} onPress={() => setAttribute(title)}>
-      <Text style={styles.itemTitle}>
-        {displayedTitle}
-      </Text>
+      <Text style={styles.itemTitle}>{displayedTitle}</Text>
     </Pressable>
   );
 };
