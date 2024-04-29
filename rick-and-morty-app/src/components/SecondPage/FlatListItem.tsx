@@ -1,23 +1,28 @@
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Pressable
 } from 'react-native';
+import React from 'react';
 
 interface FlatListItemProps {
   title: string;
   setAttribute: (value: string) => void;
 }
 
-export const FlatListItem = ({ title, setAttribute }: FlatListItemProps) => {
+export const FlatListItem: React.FC<FlatListItemProps> = ({
+  title,
+  setAttribute
+}) => {
   const displayedTitle = title[0].toUpperCase() + title.slice(1);
 
   return (
-    <View style={styles.item}>
-      <Text style={styles.itemTitle} onPress={() => setAttribute(title)}>
+    <Pressable style={styles.item} onPress={() => setAttribute(title)}>
+      <Text style={styles.itemTitle}>
         {displayedTitle}
       </Text>
-    </View>
+    </Pressable>
   );
 };
 
@@ -25,11 +30,9 @@ const styles = StyleSheet.create({
   item: {
     padding: 20,
     width: 230,
-    marginVertical: 8,
+    marginVertical: 16,
     backgroundColor: '#f6eee3',
     borderRadius: 20,
-    shadowColor: '#000',
-    shadowOpacity: 0.06,
   },
   itemTitle: {
     fontSize: 32,

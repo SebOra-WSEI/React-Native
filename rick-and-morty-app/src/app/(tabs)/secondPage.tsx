@@ -1,4 +1,5 @@
 import { FlatListItem } from '@/src/components/SecondPage/FlatListItem';
+import { textColor } from '@/src/constants/Colors';
 import { ATTRIBUTES } from '@/src/constants/attributes';
 import { useState } from 'react';
 import {
@@ -34,18 +35,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    marginTop: StatusBar.currentHeight || 100,
+    marginTop: StatusBar.currentHeight || 60,
   },
   image: {
     flex: 1,
     justifyContent: 'center',
   },
   pageTitle: {
-    fontSize: 22,
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: textColor
   },
   flatList: {
-    marginTop: 40,
+    marginTop: 90,
   },
 });
