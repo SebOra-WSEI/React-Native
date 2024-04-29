@@ -1,15 +1,11 @@
 import { linkColor, textColor } from '@/src/constants/Colors';
+import { backgroundUri } from '@/src/constants/backgroudURI';
 import { Link } from 'expo-router';
 import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 
 export default function TabOneScreen() {
   return (
-    <ImageBackground
-      source={{
-        uri: 'https://images.unsplash.com/photo-1507499739999-097706ad8914?q=80&w=2158&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      }}
-      style={styles.image}
-    >
+    <ImageBackground source={backgroundUri} style={styles.image}>
       <View style={styles.container}>
         <Text style={styles.title}>Rick and Morty API application</Text>
         <View style={styles.linkView}>
