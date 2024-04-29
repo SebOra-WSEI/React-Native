@@ -1,10 +1,16 @@
-import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { Link } from 'expo-router';
+import { StyleSheet, View, Text } from 'react-native';
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text>abc</Text>
-    </View>
+      <Text style={styles.title}>Rick and Morty API application</Text>
+      <View style={styles.linkView}>
+        <Link href='/(tabs)/TabTwoScreen'>
+          <Text style={styles.getStarted}>Get started!</Text>
+        </Link>
+      </View>
+    </View >
   );
 }
 
@@ -15,12 +21,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  linkView: {
+    paddingVertical: 15,
   },
+  getStarted: {
+    fontSize: 18,
+    color: '#00b4d8'
+  }
 });
