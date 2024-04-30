@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Pressable,
   Text,
+  Button,
 } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
@@ -53,17 +54,11 @@ export default function CharactersList() {
         type={type}
         setType={setType}
       />
-      <Pressable onPress={() => setIsModalVisible(true)}>
-        <View
-          style={{
-            alignItems: 'flex-end',
-            marginHorizontal: 20,
-            marginVertical: 15,
-          }}
-        >
+      <View style={styles.filterView}>
+        <Pressable onPress={() => setIsModalVisible(true)}>
           <Text style={styles.filterText}>Filter</Text>
-        </View>
-      </Pressable>
+        </Pressable>
+      </View>
       <FlatList
         data={data}
         renderItem={({ item }) => <CharactersListItem character={item} />}
@@ -76,6 +71,11 @@ export default function CharactersList() {
 }
 
 const styles = StyleSheet.create({
+  filterView: {
+    alignItems: 'flex-end',
+    marginHorizontal: 20,
+    marginVertical: 15,
+  },
   filterText: {
     color: '#2196F3',
   },
