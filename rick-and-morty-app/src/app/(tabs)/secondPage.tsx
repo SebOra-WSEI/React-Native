@@ -2,7 +2,7 @@ import { FlatListItem } from '@/src/components/SecondPage/FlatListItem';
 import { textColor } from '@/src/constants/Colors';
 import { ATTRIBUTES } from '@/src/constants/attributes';
 import { backgroundUri } from '@/src/constants/backgroudURI';
-import { useState } from 'react';
+import { ViewType } from '@/src/types/view';
 import {
   StyleSheet,
   View,
@@ -13,9 +13,6 @@ import {
 } from 'react-native';
 
 export default function SecondPage() {
-  const [attribute, setAttribute] = useState<string>('');
-  console.log(attribute);
-
   return (
     <ImageBackground source={backgroundUri} style={styles.image}>
       <View style={styles.container}>
@@ -23,9 +20,7 @@ export default function SecondPage() {
         <FlatList
           style={styles.flatList}
           data={ATTRIBUTES}
-          renderItem={({ item }) => (
-            <FlatListItem title={item} setAttribute={setAttribute} />
-          )}
+          renderItem={({ item }) => <FlatListItem view={item as ViewType} />}
           keyExtractor={(item) => item}
         />
       </View>
@@ -35,13 +30,11 @@ export default function SecondPage() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     marginTop: StatusBar.currentHeight || 60,
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
   },
   pageTitle: {
     fontSize: 30,
@@ -50,6 +43,7 @@ const styles = StyleSheet.create({
     color: textColor,
   },
   flatList: {
-    marginTop: 90,
+    paddingTop: 80,
+    height: '100%',
   },
 });
