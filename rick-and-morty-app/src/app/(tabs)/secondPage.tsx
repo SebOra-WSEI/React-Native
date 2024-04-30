@@ -32,7 +32,6 @@ export default function SecondPage() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     marginTop: StatusBar.currentHeight || 60,
   },

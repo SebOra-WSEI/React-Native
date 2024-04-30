@@ -1,5 +1,5 @@
 
-import { ImageBackground, StatusBar, StyleSheet, View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { ImageBackground, StatusBar, StyleSheet, View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import { backgroundUri } from '../constants/backgroudURI';
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'react-native-paper';
@@ -30,9 +30,10 @@ const charactersTableHeaders = [
 export default function CharactersList() {
   const [characters, setCharacters] = useState<Array<Character>>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(1);
 
   const fetchData = async () => {
-    await fetch('https://rickandmortyapi.com/api/character?page=1')
+    await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then((res) => res.json())
       .then((res) => {
         setCharacters(res?.results);
@@ -49,36 +50,43 @@ export default function CharactersList() {
   }, []);
 
   return (
-    <ImageBackground source={backgroundUri} style={styles.image}>
-      <View style={styles.container}>
-        <Text style={styles.pageTitle}>Characters</Text>
-        {loading && (<ActivityIndicator />)}
-        <DataTable style={{ marginTop: 20 }}>
-          <DataTable.Header>
-            {charactersTableHeaders.map((header) => (
-              <DataTable.Title>
-                <Text style={styles.tableHeader}>{header}</Text>
-              </DataTable.Title>
+    <ImageBackground source={backgroundUri}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.pageTitle}>Characters</Text>
+          {loading && (<ActivityIndicator />)}
+          <DataTable style={{ marginTop: 20 }}>
+            <DataTable.Header>
+              {charactersTableHeaders.map((header) => (
+                <DataTable.Title>
+                  <Text style={styles.tableHeader}>{header}</Text>
+                </DataTable.Title>
+              ))}
+            </DataTable.Header>
+            {characters.map((c) => (
+              <DataTable.Row>
+                <DataTable.Cell>
+                  <Text style={styles.cell}>{c.name}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell>
+                  <Text style={styles.cell}>{c.status}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell>
+                  <Text style={styles.cell}>{c.species}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell>
+                  <Text style={styles.cell}>{c.gender}</Text>
+                </DataTable.Cell>
+              </DataTable.Row>
             ))}
-          </DataTable.Header>
-          {characters.map((c) => (
-            <DataTable.Row>
-              <DataTable.Cell>{c.name}</DataTable.Cell>
-              <DataTable.Cell>{c.status}</DataTable.Cell>
-              <DataTable.Cell>{c.species}</DataTable.Cell>
-              <DataTable.Cell>{c.gender}</DataTable.Cell>
-            </DataTable.Row>
-          ))}
-        </DataTable>
-      </View>
+          </DataTable>
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -93,5 +101,10 @@ const styles = StyleSheet.create({
     color: textColor,
     fontSize: 15,
     fontWeight: 'bold'
+  },
+  cell: {
+    color: '#ffe5d9',
+    fontWeight: '400',
+    fontSize: 14
   }
 });
