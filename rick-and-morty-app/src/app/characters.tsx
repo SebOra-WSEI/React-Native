@@ -35,7 +35,6 @@ export default function CharactersList() {
       .then((res) => res.json())
       .then((res: CharacterResponse) => {
         setAllPages(res.info.pages)
-        setHasNextPage(!!res?.info)
         setCharacters([...characters, ...res?.results]);
         setLoading(false);
       })
@@ -46,19 +45,18 @@ export default function CharactersList() {
       });
   };
 
+
   useEffect(() => {
-    if (currentPage >= allPages) {
-      setHasNextPage(false)
+    if (currentPage === allPages) {
+      setHasNextPage(false);
     }
   }, [currentPage, allPages])
 
   useEffect(() => {
-    fetchData(currentPage);
+    hasNextPage && fetchData(currentPage);
   }, [currentPage, filter]);
 
-  const loadMoreData = () => {
-    hasNextPage && setCurrentPage(currentPage + 1);
-  };
+  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
   if (loading) {
     return (
@@ -87,6 +85,7 @@ export default function CharactersList() {
           <CharactersListItem character={item} />
         )}
         keyExtractor={(item, index) => String(item.id) + index}
+        // ListFooterComponent={<Loader />}
         ListFooterComponent={hasNextPage ? <Loader /> : null}
         onEndReached={loadMoreData}
       />
