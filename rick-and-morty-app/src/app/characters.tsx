@@ -65,5 +65,5 @@ const styles = StyleSheet.create({
   view: {
     justifyContent: 'center',
     flex: 1
-  }
+  },
 })

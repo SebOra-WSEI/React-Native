@@ -2,6 +2,7 @@ import { FlatListItem } from '@/src/components/SecondPage/FlatListItem';
 import { textColor } from '@/src/constants/Colors';
 import { ATTRIBUTES } from '@/src/constants/attributes';
 import { backgroundUri } from '@/src/constants/backgroudURI';
+import { ViewType } from '@/src/types/view';
 import {
   StyleSheet,
   View,
@@ -12,7 +13,6 @@ import {
 } from 'react-native';
 
 export default function SecondPage() {
-
   return (
     <ImageBackground source={backgroundUri} style={styles.image}>
       <View style={styles.container}>
@@ -21,7 +21,7 @@ export default function SecondPage() {
           style={styles.flatList}
           data={ATTRIBUTES}
           renderItem={({ item }) => (
-            <FlatListItem title={item} />
+            <FlatListItem view={item as ViewType} />
           )}
           keyExtractor={(item) => item}
         />
