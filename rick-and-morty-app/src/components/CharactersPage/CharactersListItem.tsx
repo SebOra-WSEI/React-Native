@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Image,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import React from 'react';
 import { Character } from '@/src/types/character';
@@ -14,17 +14,19 @@ interface FlatListItemProps {
 
 export const CharactersListItem: React.FC<FlatListItemProps> = ({
   character
-}) => (
-  <View style={styles.view}>
-    <Image style={styles.img} source={{ uri: character.image }} />
-    <View>
-      <Text style={styles.name}>{character.name}</Text>
-      <Text style={styles.secondText}>Species: {character.species}</Text>
-      <Text style={styles.secondText}>Status: {character.status}</Text>
-      <Text style={styles.secondText}>Gender: {character.gender}</Text>
+}) => {
+  return (
+    <View style={styles.view}>
+      <Image style={styles.img} source={{ uri: character.image }} />
+      <View>
+        <Text style={styles.name}>{character.name}</Text>
+        <Text style={styles.secondText}>Species: {character.species}</Text>
+        <Text style={styles.secondText}>Status: {character.status}</Text>
+        <Text style={styles.secondText}>Gender: {character.gender}</Text>
+      </View>
     </View>
-  </View>
-);
+  );
+}
 
 const styles = StyleSheet.create({
   view: {

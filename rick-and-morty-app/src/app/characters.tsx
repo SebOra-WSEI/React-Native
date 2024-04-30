@@ -4,7 +4,6 @@ import {
   ActivityIndicator,
   FlatList,
   StyleSheet,
-  Text
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
@@ -12,6 +11,15 @@ import { Character } from '../types/character';
 import { Loader } from '../components/Loader/Loader';
 import { CharacterResponse } from '../types/response';
 import { UnknownError } from '../components/Error/UnknownError';
+import RNPickerSelect from 'react-native-picker-select';
+
+enum CharacterFilters {
+  Name = 'name',
+  Status = 'status',
+  Species = 'species',
+  Type = 'type',
+  Gender = 'gender'
+}
 
 export default function CharactersList() {
   const [characters, setCharacters] = useState<Array<Character>>([]);
@@ -20,9 +28,10 @@ export default function CharactersList() {
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [allPages, setAllPages] = useState<number>(0);
+  const [filter, setFilter] = useState<CharacterFilters | null>(null)
 
   const fetchData = async (page: number) => {
-    await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+    await fetch(`https://rickandmortyapi.com/api/character?page=${page}${!!filter ? `&${filter}=rick` : ''}`)
       .then((res) => res.json())
       .then((res: CharacterResponse) => {
         setAllPages(res.info.pages)
@@ -31,6 +40,7 @@ export default function CharactersList() {
         setLoading(false);
       })
       .catch((err) => {
+        console.log(err)
         setError(err)
         setLoading(false);
       });
@@ -43,8 +53,8 @@ export default function CharactersList() {
   }, [currentPage, allPages])
 
   useEffect(() => {
-    hasNextPage && fetchData(currentPage);
-  }, [currentPage]);
+    fetchData(currentPage);
+  }, [currentPage, filter]);
 
   const loadMoreData = () => {
     hasNextPage && setCurrentPage(currentPage + 1);
@@ -63,15 +73,24 @@ export default function CharactersList() {
   }
 
   return (
-    <FlatList
-      data={characters}
-      renderItem={({ item }) => (
-        <CharactersListItem character={item} />
-      )}
-      keyExtractor={(item, index) => String(item.id) + index}
-      ListFooterComponent={hasNextPage ? <Loader /> : null}
-      onEndReached={loadMoreData}
-    />
+    <View>
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        onValueChange={(value) => setFilter(value)}
+        items={Object.entries(CharacterFilters).map((
+          [label, value]) => ({ label, value }))
+        }
+      />
+      <FlatList
+        data={characters}
+        renderItem={({ item }) => (
+          <CharactersListItem character={item} />
+        )}
+        keyExtractor={(item, index) => String(item.id) + index}
+        ListFooterComponent={hasNextPage ? <Loader /> : null}
+        onEndReached={loadMoreData}
+      />
+    </View>
   );
 };
 
@@ -80,4 +99,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1
   },
-})
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    textAlign: 'center',
+    borderWidth: 1,
+    borderRadius: 20,
+    marginHorizontal: 30,
+    paddingVertical: 10,
+    marginVertical: 15,
+    fontSize: 16,
+    borderColor: '#777',
+  },
+});
