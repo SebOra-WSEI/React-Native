@@ -20,9 +20,7 @@ export default function SecondPage() {
         <FlatList
           style={styles.flatList}
           data={ATTRIBUTES}
-          renderItem={({ item }) => (
-            <FlatListItem view={item as ViewType} />
-          )}
+          renderItem={({ item }) => <FlatListItem view={item as ViewType} />}
           keyExtractor={(item) => item}
         />
       </View>
@@ -46,6 +44,6 @@ const styles = StyleSheet.create({
   },
   flatList: {
     paddingTop: 80,
-    height: '100%'
+    height: '100%',
   },
 });

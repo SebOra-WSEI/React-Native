@@ -1,10 +1,4 @@
-
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import React from 'react';
 import { Character } from '@/src/types/character';
 
@@ -13,7 +7,7 @@ interface FlatListItemProps {
 }
 
 export const CharactersListItem: React.FC<FlatListItemProps> = ({
-  character
+  character,
 }) => {
   return (
     <View style={styles.view}>
@@ -26,7 +20,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   view: {
@@ -34,18 +28,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 13,
     borderBottomWidth: 1,
-    borderColor: '#ddd'
+    borderColor: '#ddd',
   },
   img: {
     height: 50,
     width: 50,
     marginRight: 16,
-    marginVertical: 10
+    marginVertical: 10,
   },
   secondText: {
-    color: '#777'
+    color: '#777',
   },
   name: {
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });

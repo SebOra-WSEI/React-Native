@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 export const UnknownError: React.FC = () => (
   <View style={styles.view}>
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 26,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});

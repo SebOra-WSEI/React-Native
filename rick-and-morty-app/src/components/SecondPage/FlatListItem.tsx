@@ -8,9 +8,7 @@ interface FlatListItemProps {
   view: ViewType;
 }
 
-export const FlatListItem: React.FC<FlatListItemProps> = ({
-  view,
-}) => {
+export const FlatListItem: React.FC<FlatListItemProps> = ({ view }) => {
   const displayedTitle = view[0].toUpperCase() + view.slice(1);
 
   return (
