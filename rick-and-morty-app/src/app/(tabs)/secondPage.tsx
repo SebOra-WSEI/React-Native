@@ -2,7 +2,6 @@ import { FlatListItem } from '@/src/components/SecondPage/FlatListItem';
 import { textColor } from '@/src/constants/Colors';
 import { ATTRIBUTES } from '@/src/constants/attributes';
 import { backgroundUri } from '@/src/constants/backgroudURI';
-import { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -13,8 +12,6 @@ import {
 } from 'react-native';
 
 export default function SecondPage() {
-  const [attribute, setAttribute] = useState<string>('');
-  console.log(attribute);
 
   return (
     <ImageBackground source={backgroundUri} style={styles.image}>
@@ -24,7 +21,7 @@ export default function SecondPage() {
           style={styles.flatList}
           data={ATTRIBUTES}
           renderItem={({ item }) => (
-            <FlatListItem title={item} setAttribute={setAttribute} />
+            <FlatListItem title={item} />
           )}
           keyExtractor={(item) => item}
         />
@@ -41,7 +38,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
   },
   pageTitle: {
     fontSize: 30,
@@ -50,6 +46,6 @@ const styles = StyleSheet.create({
     color: textColor,
   },
   flatList: {
-    marginTop: 90,
+    paddingTop: 80,
   },
 });
