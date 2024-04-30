@@ -31,7 +31,7 @@ export default function CharactersList() {
       .then((res) => res.json())
       .then((res: CharacterResponse) => {
         setAllPages(res.info.pages);
-        setCharacters([...characters, ...res?.results]);
+        setCharacters([...characters, ...res.results]);
         setLoading(false);
       })
       .catch((err) => {
@@ -78,7 +78,6 @@ export default function CharactersList() {
         data={characters}
         renderItem={({ item }) => <CharactersListItem character={item} />}
         keyExtractor={(item, index) => String(item.id) + index}
-        // ListFooterComponent={<Loader />}
         ListFooterComponent={hasNextPage ? <Loader /> : null}
         onEndReached={loadMoreData}
       />
