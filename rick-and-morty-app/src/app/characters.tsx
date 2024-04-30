@@ -3,41 +3,51 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  Text
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
 import { Character } from '../types/character';
 import { Loader } from '../components/Loader/Loader';
+import { CharacterResponse } from '../types/response';
+import { UnknownError } from '../components/Error/UnknownError';
 
 export default function CharactersList() {
   const [characters, setCharacters] = useState<Array<Character>>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [allPages, setAllPages] = useState<number>(0);
 
   const fetchData = async (page: number) => {
     await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then((res) => res.json())
-      .then((res) => {
+      .then((res: CharacterResponse) => {
+        setAllPages(res.info.pages)
+        setHasNextPage(!!res?.info)
         setCharacters([...characters, ...res?.results]);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err)
         setLoading(false);
       });
   };
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+    if (currentPage >= allPages) {
+      setHasNextPage(false)
+    }
+  }, [currentPage, allPages])
 
   useEffect(() => {
-    setCurrentPage(1)
-  }, [])
+    hasNextPage && fetchData(currentPage);
+  }, [currentPage]);
 
   const loadMoreData = () => {
-    setCurrentPage(currentPage + 1);
+    hasNextPage && setCurrentPage(currentPage + 1);
   };
 
   if (loading) {
@@ -48,6 +58,10 @@ export default function CharactersList() {
     );
   };
 
+  if (error) {
+    return <UnknownError />
+  }
+
   return (
     <FlatList
       data={characters}
@@ -55,7 +69,7 @@ export default function CharactersList() {
         <CharactersListItem character={item} />
       )}
       keyExtractor={(item, index) => String(item.id) + index}
-      ListFooterComponent={<Loader />}
+      ListFooterComponent={hasNextPage ? <Loader /> : null}
       onEndReached={loadMoreData}
     />
   );
