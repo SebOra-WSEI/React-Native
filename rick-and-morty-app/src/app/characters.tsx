@@ -1,5 +1,16 @@
 
-import { ImageBackground, StatusBar, StyleSheet, View, Text, ActivityIndicator, ScrollView } from 'react-native';
+import {
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+  ScrollView,
+  FlatList,
+  ListRenderItemInfo,
+  Image
+} from 'react-native';
 import { backgroundUri } from '../constants/backgroudURI';
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'react-native-paper';
@@ -27,16 +38,52 @@ const charactersTableHeaders = [
   'Gender'
 ]
 
+interface FlatListItemProps {
+  character: Character;
+}
+
+export const FlatListItem: React.FC<FlatListItemProps> = ({
+  character,
+}) => {
+
+  return (
+    <View style={{
+      flexDirection: 'row',
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      borderBottomWidth: 1,
+      borderColor: '#ddd'
+    }}>
+      <Image style={{
+        height: 50,
+        width: 50,
+        marginRight: 16
+      }}
+        source={{ uri: character.image }}
+      />
+      <View style={{
+        justifyContent: 'space-around'
+      }}>
+        <Text style={{ fontSize: 16 }}>{character.name}</Text>
+        <Text style={{ color: '#777' }}>{character.species}</Text>
+        <Text style={{ color: '#777' }}>{character.status}</Text>
+        <Text style={{ color: '#777' }}>{character.gender}</Text>
+      </View>
+    </View>
+  );
+};
+
 export default function CharactersList() {
   const [characters, setCharacters] = useState<Array<Character>>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [page, setPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  console.log(currentPage)
 
-  const fetchData = async () => {
+  const fetchData = async (page: number) => {
     await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then((res) => res.json())
       .then((res) => {
-        setCharacters(res?.results);
+        setCharacters([...characters, ...res?.results]);
         setLoading(false);
       })
       .catch((err) => {
@@ -46,65 +93,32 @@ export default function CharactersList() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    setCurrentPage(1)
+  }, [])
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
+
+  const renderLoader = () => (
+    <View>
+      <ActivityIndicator style={{ marginVertical: 20 }} />
+    </View>
+  );
+
+  const loadMore = () => {
+    setCurrentPage(currentPage + 1);
+  }
 
   return (
-    <ImageBackground source={backgroundUri}>
-      <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.pageTitle}>Characters</Text>
-          {loading && (<ActivityIndicator />)}
-          <DataTable style={{ marginTop: 20 }}>
-            <DataTable.Header>
-              {charactersTableHeaders.map((header) => (
-                <DataTable.Title>
-                  <Text style={styles.tableHeader}>{header}</Text>
-                </DataTable.Title>
-              ))}
-            </DataTable.Header>
-            {characters.map((c) => (
-              <DataTable.Row>
-                <DataTable.Cell>
-                  <Text style={styles.cell}>{c.name}</Text>
-                </DataTable.Cell>
-                <DataTable.Cell>
-                  <Text style={styles.cell}>{c.status}</Text>
-                </DataTable.Cell>
-                <DataTable.Cell>
-                  <Text style={styles.cell}>{c.species}</Text>
-                </DataTable.Cell>
-                <DataTable.Cell>
-                  <Text style={styles.cell}>{c.gender}</Text>
-                </DataTable.Cell>
-              </DataTable.Row>
-            ))}
-          </DataTable>
-        </View>
-      </ScrollView>
-    </ImageBackground>
+    <FlatList
+      data={characters}
+      renderItem={({ item }) => (
+        <FlatListItem character={item} />
+      )}
+      keyExtractor={(item) => String(item.id)}
+      ListFooterComponent={renderLoader}
+      onEndReached={loadMore}
+    />
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: StatusBar.currentHeight || 10,
-  },
-  pageTitle: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: textColor,
-  },
-  tableHeader: {
-    color: textColor,
-    fontSize: 15,
-    fontWeight: 'bold'
-  },
-  cell: {
-    color: '#ffe5d9',
-    fontWeight: '400',
-    fontSize: 14
-  }
-});
+};

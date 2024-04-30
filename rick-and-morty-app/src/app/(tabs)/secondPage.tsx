@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
   },
   flatList: {
     paddingTop: 80,
+    height: '100%'
   },
 });
