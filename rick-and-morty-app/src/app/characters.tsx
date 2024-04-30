@@ -8,9 +8,9 @@ import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
 import { Loader } from '../components/Loader/Loader';
 import { UnknownError } from '../components/Error/UnknownError';
-import RNPickerSelect from 'react-native-picker-select';
 import { useGetCharacters } from '../hooks/useGetCharacters';
 import { CharacterFilters } from '../types/character';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);

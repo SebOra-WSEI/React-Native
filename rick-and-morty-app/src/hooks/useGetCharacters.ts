@@ -11,13 +11,12 @@ export const useGetCharacters = (
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
-  const [allPages, setAllPages] = useState<number>(0);
 
   const fetchData = async (page: number) => {
     await fetch(`${ApiURL}?page=${page}${!!filter ? `&${filter}=rick` : ''}`)
       .then((res) => res.json())
       .then((res: CharacterResponse) => {
-        setAllPages(res.info.pages);
+        setHasNextPage(!!res.info.next);
         setCharacters([...characters, ...res.results]);
         setLoading(false);
       })
@@ -28,13 +27,7 @@ export const useGetCharacters = (
   };
 
   useEffect(() => {
-    if (currentPage === allPages) {
-      setHasNextPage(false);
-    }
-  }, [currentPage, allPages]);
-
-  useEffect(() => {
-    hasNextPage && fetchData(currentPage);
+    fetchData(currentPage);
   }, [currentPage, filter]);
 
   return {
