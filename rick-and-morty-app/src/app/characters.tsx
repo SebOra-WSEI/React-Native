@@ -1,56 +1,30 @@
-import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import {
+  View,
+  ActivityIndicator,
+  FlatList,
+  StyleSheet
+} from 'react-native';
+import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
-import { Character } from '../types/character';
 import { Loader } from '../components/Loader/Loader';
-import { CharacterResponse } from '../types/response';
 import { UnknownError } from '../components/Error/UnknownError';
 import RNPickerSelect from 'react-native-picker-select';
-
-enum CharacterFilters {
-  Name = 'name',
-  Status = 'status',
-  Species = 'species',
-  Type = 'type',
-  Gender = 'gender',
-}
+import { useGetCharacters } from '../hooks/useGetCharacters';
+import { CharacterFilters } from '../types/character';
 
 export default function CharactersList() {
-  const [characters, setCharacters] = useState<Array<Character>>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
-  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [allPages, setAllPages] = useState<number>(0);
   const [filter, setFilter] = useState<CharacterFilters | null>(null);
 
-  const fetchData = async (page: number) => {
-    await fetch(
-      `https://rickandmortyapi.com/api/character?page=${page}${!!filter ? `&${filter}=rick` : ''}`
-    )
-      .then((res) => res.json())
-      .then((res: CharacterResponse) => {
-        setAllPages(res.info.pages);
-        setCharacters([...characters, ...res.results]);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err);
-        setLoading(false);
-      });
-  };
+  const {
+    loading,
+    error,
+    data,
+    hasNextPage
+  } = useGetCharacters(currentPage, filter)
 
-  useEffect(() => {
-    if (currentPage === allPages) {
-      setHasNextPage(false);
-    }
-  }, [currentPage, allPages]);
-
-  useEffect(() => {
-    hasNextPage && fetchData(currentPage);
-  }, [currentPage, filter]);
-
-  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
+  const loadMoreData = () =>
+    hasNextPage && setCurrentPage(currentPage + 1);
 
   if (loading) {
     return (
@@ -75,7 +49,7 @@ export default function CharactersList() {
         }))}
       />
       <FlatList
-        data={characters}
+        data={data}
         renderItem={({ item }) => <CharactersListItem character={item} />}
         keyExtractor={(item, index) => String(item.id) + index}
         ListFooterComponent={hasNextPage ? <Loader /> : null}

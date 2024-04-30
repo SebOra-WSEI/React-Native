@@ -11,3 +11,10 @@ export interface CharacterResponse {
   info: InfoResponse;
   results: Array<Character>;
 }
+
+export interface QueryResponse<T> {
+  loading: boolean;
+  error: boolean;
+  data: T;
+  hasNextPage: boolean;
+}

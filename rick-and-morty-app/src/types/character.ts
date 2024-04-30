@@ -12,3 +12,11 @@ export interface Character {
   url: string;
   created: string;
 }
+
+export enum CharacterFilters {
+  Name = 'name',
+  Status = 'status',
+  Species = 'species',
+  Type = 'type',
+  Gender = 'gender',
+}
