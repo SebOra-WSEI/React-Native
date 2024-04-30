@@ -2,29 +2,31 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  Pressable,
+  Text,
+  Button,
 } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
 import { Loader } from '../components/Loader/Loader';
 import { UnknownError } from '../components/Error/UnknownError';
 import { useGetCharacters } from '../hooks/useGetCharacters';
-import { CharacterFilters } from '../types/character';
-import RNPickerSelect from 'react-native-picker-select';
+import { CharacterGender, CharacterStatus } from '../types/character';
+import { FilterCharactersModal } from '../components/CharactersPage/FilterCharactersModal';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [filter, setFilter] = useState<CharacterFilters | null>(null);
+  const [status, setStatus] = useState<CharacterStatus | undefined>(undefined);
+  const [gender, setGender] = useState<CharacterGender | undefined>(undefined);
+  const [name, setName] = useState<string>('');
+  const [species, setSpecies] = useState<string>('');
+  const [type, setType] = useState<string>('');
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const {
-    loading,
-    error,
-    data,
-    hasNextPage
-  } = useGetCharacters(currentPage, filter)
+  const { loading, error, data, hasNextPage } = useGetCharacters(currentPage);
 
-  const loadMoreData = () =>
-    hasNextPage && setCurrentPage(currentPage + 1);
+  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
   if (loading) {
     return (
@@ -40,14 +42,23 @@ export default function CharactersList() {
 
   return (
     <View>
-      <RNPickerSelect
-        style={pickerSelectStyles}
-        onValueChange={(value) => setFilter(value)}
-        items={Object.entries(CharacterFilters).map(([label, value]) => ({
-          label,
-          value,
-        }))}
+      <FilterCharactersModal
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        setStatus={setStatus}
+        setGender={setGender}
+        name={name}
+        setName={setName}
+        species={species}
+        setSpecies={setSpecies}
+        type={type}
+        setType={setType}
       />
+      <View style={styles.filterView}>
+        <Pressable onPress={() => setIsModalVisible(true)}>
+          <Text style={styles.filterText}>Filter</Text>
+        </Pressable>
+      </View>
       <FlatList
         data={data}
         renderItem={({ item }) => <CharactersListItem character={item} />}
@@ -60,21 +71,16 @@ export default function CharactersList() {
 }
 
 const styles = StyleSheet.create({
+  filterView: {
+    alignItems: 'flex-end',
+    marginHorizontal: 20,
+    marginVertical: 15,
+  },
+  filterText: {
+    color: '#2196F3',
+  },
   view: {
     justifyContent: 'center',
     flex: 1,
-  },
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    textAlign: 'center',
-    borderWidth: 1,
-    borderRadius: 20,
-    marginHorizontal: 30,
-    paddingVertical: 10,
-    marginVertical: 15,
-    fontSize: 16,
-    borderColor: '#777',
   },
 });
