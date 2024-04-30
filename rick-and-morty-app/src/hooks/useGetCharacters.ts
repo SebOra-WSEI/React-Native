@@ -13,11 +13,14 @@ export const useGetCharacters = (
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
 
   const fetchData = async (page: number) => {
-    await fetch(`${ApiURL}?page=${page}${!!filter ? `&${filter}=rick` : ''}`)
+    await fetch(`${ApiURL}?page=${page}${!!filter ? `&${filter}=morty` : ''}`)
       .then((res) => res.json())
       .then((res: CharacterResponse) => {
         setHasNextPage(!!res.info.next);
-        setCharacters([...characters, ...res.results]);
+        setCharacters([
+          ...filterCharacters(characters, filter),
+          ...res.results,
+        ]);
         setLoading(false);
       })
       .catch((err) => {
@@ -37,3 +40,14 @@ export const useGetCharacters = (
     hasNextPage,
   };
 };
+
+function filterCharacters(
+  characters: Array<Character>,
+  filter: CharacterFilters | null
+) {
+  return characters.filter((c) =>
+    filter
+      ? c[filter].toLocaleLowerCase().includes('morty'.toLocaleLowerCase())
+      : c
+  );
+}
