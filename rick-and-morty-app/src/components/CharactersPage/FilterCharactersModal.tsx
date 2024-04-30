@@ -4,7 +4,7 @@ import {
   Modal,
   Pressable,
   Text,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import React from 'react';
 import RNPickerSelect from 'react-native-picker-select';
@@ -35,13 +35,8 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
   type,
   setType,
 }) => {
-
   return (
-    <Modal
-      animationType="slide"
-      transparent
-      visible={isModalVisible}
-    >
+    <Modal animationType='slide' transparent visible={isModalVisible}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <RNPickerSelect
@@ -51,7 +46,7 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
               label,
               value,
             }))}
-            placeholder={{ label: 'Filter by status ...', }}
+            placeholder={{ label: 'Filter by status ...' }}
           />
           <RNPickerSelect
             style={pickerSelectStyles}
@@ -60,36 +55,37 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
               label,
               value,
             }))}
-            placeholder={{ label: 'Filter by gender ...', }}
+            placeholder={{ label: 'Filter by gender ...' }}
           />
           <TextInput
             style={styles.input}
-            placeholder="Filter by name ..."
-            onChangeText={value => setName(value)}
+            placeholder='Filter by name ...'
+            onChangeText={(value) => setName(value)}
             defaultValue={name}
           />
           <TextInput
             style={styles.input}
-            placeholder="Filter by species ..."
-            onChangeText={value => setSpecies(value)}
+            placeholder='Filter by species ...'
+            onChangeText={(value) => setSpecies(value)}
             defaultValue={species}
           />
           <TextInput
             style={styles.input}
-            placeholder="Filter by type ..."
-            onChangeText={value => setType(value)}
+            placeholder='Filter by type ...'
+            onChangeText={(value) => setType(value)}
             defaultValue={type}
           />
           <Pressable
             style={styles.button}
-            onPress={() => setIsModalVisible(false)}>
+            onPress={() => setIsModalVisible(false)}
+          >
             <Text style={styles.textStyle}>Hide Modal</Text>
           </Pressable>
         </View>
       </View>
     </Modal>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   input: {

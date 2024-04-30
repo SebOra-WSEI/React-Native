@@ -4,7 +4,7 @@ import {
   FlatList,
   StyleSheet,
   Pressable,
-  Text
+  Text,
 } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
@@ -23,15 +23,9 @@ export default function CharactersList() {
   const [type, setType] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const {
-    loading,
-    error,
-    data,
-    hasNextPage
-  } = useGetCharacters(currentPage)
+  const { loading, error, data, hasNextPage } = useGetCharacters(currentPage);
 
-  const loadMoreData = () =>
-    hasNextPage && setCurrentPage(currentPage + 1);
+  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
   if (loading) {
     return (
@@ -59,9 +53,14 @@ export default function CharactersList() {
         type={type}
         setType={setType}
       />
-      <Pressable
-        onPress={() => setIsModalVisible(true)}>
-        <View style={{ alignItems: 'flex-end', marginHorizontal: 20, marginVertical: 15 }}>
+      <Pressable onPress={() => setIsModalVisible(true)}>
+        <View
+          style={{
+            alignItems: 'flex-end',
+            marginHorizontal: 20,
+            marginVertical: 15,
+          }}
+        >
           <Text style={styles.filterText}>Filter</Text>
         </View>
       </Pressable>
