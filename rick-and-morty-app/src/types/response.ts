@@ -1,20 +1,11 @@
-import { Character } from './character';
+export interface QueryResponse<T> {
+  info: Info;
+  results: Array<T>;
+}
 
-export interface InfoResponse {
+interface Info {
   count: number;
   pages: number;
   next: string;
   prev: string | null;
-}
-
-export interface CharacterResponse {
-  info: InfoResponse;
-  results: Array<Character>;
-}
-
-export interface QueryResponse<T> {
-  loading: boolean;
-  error: boolean;
-  data: T;
-  hasNextPage: boolean;
 }

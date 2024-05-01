@@ -9,14 +9,16 @@ interface FlatListItemProps {
 export const CharactersListItem: React.FC<FlatListItemProps> = ({
   character,
 }) => {
+  const { image, name, species, status, gender } = character;
+
   return (
     <View style={styles.view}>
-      <Image style={styles.img} source={{ uri: character.image }} />
+      <Image style={styles.img} source={{ uri: image }} />
       <View>
-        <Text style={styles.name}>{character.name}</Text>
-        <Text style={styles.secondText}>Species: {character.species}</Text>
-        <Text style={styles.secondText}>Status: {character.status}</Text>
-        <Text style={styles.secondText}>Gender: {character.gender}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.secondText}>Species: {species}</Text>
+        <Text style={styles.secondText}>Status: {status}</Text>
+        <Text style={styles.secondText}>Gender: {gender}</Text>
       </View>
     </View>
   );

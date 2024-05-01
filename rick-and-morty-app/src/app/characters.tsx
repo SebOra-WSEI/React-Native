@@ -11,9 +11,10 @@ import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
 import { Loader } from '../components/Loader/Loader';
 import { UnknownError } from '../components/Error/UnknownError';
-import { useGetCharacters } from '../hooks/useGetCharacters';
+import { useGetData } from '../hooks/useGetData';
 import { CharacterGender, CharacterStatus } from '../types/character';
 import { FilterCharactersModal } from '../components/CharactersPage/FilterCharactersModal';
+import { endpoints } from '../utils/endpoints';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -24,7 +25,8 @@ export default function CharactersList() {
   const [type, setType] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const { loading, error, data, hasNextPage } = useGetCharacters(currentPage);
+  const { loading, error, data, hasNextPage } =
+    useGetData(endpoints.characters, currentPage);
 
   const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
