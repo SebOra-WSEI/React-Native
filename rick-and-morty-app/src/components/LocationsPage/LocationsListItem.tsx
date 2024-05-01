@@ -1,14 +1,14 @@
-import { listStyles } from "@/src/styles/listStyles";
-import { Location } from "@/src/types/location";
-import React from "react";
-import { View, Text } from "react-native";
+import { listStyles } from '@/src/styles/listStyles';
+import { Location } from '@/src/types/location';
+import React from 'react';
+import { View, Text } from 'react-native';
 
 interface LocationsListItemProps {
-  location: Location
+  location: Location;
 }
 
 export const LocationsListItem: React.FC<LocationsListItemProps> = ({
-  location
+  location,
 }) => {
   const { name, type, dimension } = location;
 
@@ -20,5 +20,5 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
         <Text style={listStyles.secondText}>Dimension: {dimension}</Text>
       </View>
     </View>
-  )
+  );
 };

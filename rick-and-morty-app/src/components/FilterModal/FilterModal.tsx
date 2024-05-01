@@ -1,10 +1,4 @@
-import {
-  View,
-  Modal,
-  Pressable,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import { View, Modal, Pressable, Text, StyleSheet } from 'react-native';
 import React, { PropsWithChildren } from 'react';
 
 interface FilterModalProps extends PropsWithChildren {
@@ -15,7 +9,7 @@ interface FilterModalProps extends PropsWithChildren {
 export const FilterModal: React.FC<FilterModalProps> = ({
   isModalVisible,
   setIsModalVisible,
-  children
+  children,
 }) => (
   <Modal animationType='slide' transparent visible={isModalVisible}>
     <View style={styles.centeredView}>
@@ -30,7 +24,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
       </View>
     </View>
   </Modal>
-)
+);
 
 const styles = StyleSheet.create({
   centeredView: {

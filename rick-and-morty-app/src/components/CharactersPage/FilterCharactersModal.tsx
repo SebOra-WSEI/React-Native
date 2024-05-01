@@ -1,7 +1,4 @@
-import {
-  TextInput,
-  StyleSheet,
-} from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
 import React from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { CharacterGender, CharacterStatus } from '@/src/types/character';
