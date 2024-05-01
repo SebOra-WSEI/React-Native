@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { QueryResponse } from '../types/response';
-import { CharacterGender, CharacterStatus } from '../types/character';
+import { DefaultCharacterFilters } from '../types/character';
 
 interface UseGetDataResult<T> {
   loading: boolean;
@@ -12,13 +12,7 @@ interface UseGetDataResult<T> {
 interface useGetDataArgs {
   endpoint: string;
   currentPage: number;
-  characterFilters?: {
-    name?: string;
-    status?: CharacterStatus;
-    gender?: CharacterGender;
-    species?: string;
-    type?: string;
-  };
+  characterFilters?: DefaultCharacterFilters;
 }
 
 export function useGetData<T>({
@@ -31,9 +25,15 @@ export function useGetData<T>({
   const [error, setError] = useState<boolean>(false);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
 
-  const { name, species, status, gender, type } = characterFilters ?? {};
+  const {
+    name: characterName,
+    species,
+    status,
+    gender,
+    type,
+  } = characterFilters ?? {};
 
-  const nameQueryFilter = name ? `&name=${name}` : '';
+  const nameQueryFilter = characterName ? `&name=${characterName}` : '';
   const speciesQueryFilter = species ? `&species=${species}` : '';
   const statusQueryFilter = status ? `&status=${status}` : '';
   const genderQueryFilter = gender ? `&gender=${gender}` : '';
@@ -69,14 +69,7 @@ export function useGetData<T>({
 
   useEffect(() => {
     fetchData(currentPage);
-  }, [
-    currentPage,
-    characterFilters?.name,
-    characterFilters?.species,
-    characterFilters?.status,
-    characterFilters?.gender,
-    characterFilters?.type,
-  ]);
+  }, [currentPage, characterName, species, status, gender, type]);
 
   return {
     loading,

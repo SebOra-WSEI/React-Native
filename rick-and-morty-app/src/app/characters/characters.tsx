@@ -54,10 +54,15 @@ export default function CharactersList() {
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         setStatus={setStatus}
+        status={status}
         setGender={setGender}
+        gender={gender}
         setName={setName}
+        name={name}
         setSpecies={setSpecies}
+        species={species}
         setType={setType}
+        type={type}
         setCurrentPage={setCurrentPage}
       />
       <View style={listStyles.filterView}>

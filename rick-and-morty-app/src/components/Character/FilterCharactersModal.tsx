@@ -9,10 +9,15 @@ interface FilterCharactersModalProps {
   isModalVisible: boolean;
   setIsModalVisible: (value: boolean) => void;
   setStatus: (value: CharacterStatus | undefined) => void;
+  status: CharacterStatus | undefined,
   setGender: (value: CharacterGender | undefined) => void;
+  gender: CharacterGender | undefined,
   setName: (value: string) => void;
+  name: string;
   setSpecies: (value: string) => void;
+  species: string;
   setType: (value: string) => void;
+  type: string
   setCurrentPage: (value: number) => void;
 }
 
@@ -20,14 +25,26 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
   isModalVisible,
   setIsModalVisible,
   setStatus,
+  status,
   setGender,
+  gender,
   setName,
+  name,
   setSpecies,
+  species,
   setType,
+  type,
   setCurrentPage
 }) => {
-  const [filters, setFilters] = useState<DefaultCharacterFilters>(defaultCharacterFilters);
+  const [filters, setFilters] = useState<DefaultCharacterFilters>({
+    name,
+    gender,
+    status,
+    species,
+    type
+  });
 
+  console.log(filters)
   const handleOnPress = (): void => {
     setGender(filters.gender);
     setStatus(filters.status);
@@ -37,7 +54,6 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
     setCurrentPage(1);
 
     setIsModalVisible(false);
-    setFilters(defaultCharacterFilters);
   };
 
   return (
@@ -52,6 +68,7 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
           value,
         }))}
         placeholder={{ label: 'Filter by status ...' }}
+        value={filters.status}
       />
       <RNPickerSelect
         style={pickerSelectStyles}
@@ -64,6 +81,7 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
           value,
         }))}
         placeholder={{ label: 'Filter by gender ...' }}
+        value={filters.gender}
       />
       <TextInput
         style={modalStyles.input}
