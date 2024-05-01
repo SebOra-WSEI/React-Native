@@ -40,3 +40,19 @@ interface Origin {
 }
 
 type Location = Origin;
+
+export interface DefaultCharacterFilters {
+  status: CharacterStatus | undefined;
+  gender: CharacterGender | undefined;
+  name: string;
+  species: string;
+  type: string;
+}
+
+export const defaultCharacterFilters: DefaultCharacterFilters = {
+  status: undefined,
+  gender: undefined,
+  name: '',
+  species: '',
+  type: '',
+};

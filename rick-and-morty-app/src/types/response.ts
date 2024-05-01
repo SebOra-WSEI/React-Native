@@ -1,5 +1,5 @@
 export interface QueryResponse<T> {
-  info: Info;
+  info?: Info;
   results: Array<T>;
 }
 

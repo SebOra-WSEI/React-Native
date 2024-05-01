@@ -22,10 +22,11 @@ export default function LocationsList() {
   const [type, setType] = useState<string>('');
   const [dimension, setDimension] = useState<string>('');
 
-  const { loading, error, data, hasNextPage } = useGetData<Location>(
-    endpoints.locations,
+  const { loading, error, data, hasNextPage } = useGetData<Location>({
+    endpoint: endpoints.locations,
     currentPage
-  );
+
+  });
 
   if (loading) {
     return (

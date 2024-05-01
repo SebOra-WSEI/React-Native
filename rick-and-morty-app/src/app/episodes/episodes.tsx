@@ -21,10 +21,10 @@ export default function EpisodesList() {
   const [name, setName] = useState<string>('');
   const [episodeCode, setEpisodeCode] = useState<string>('');
 
-  const { loading, error, data, hasNextPage } = useGetData<Episode>(
-    endpoints.episodes,
+  const { loading, error, data, hasNextPage } = useGetData<Episode>({
+    endpoint: endpoints.episodes,
     currentPage
-  );
+  });
 
   if (loading) {
     return (

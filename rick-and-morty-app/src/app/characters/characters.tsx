@@ -28,10 +28,11 @@ export default function CharactersList() {
   const [type, setType] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const { loading, error, data, hasNextPage } = useGetData<Character>(
-    endpoints.characters,
-    currentPage
-  );
+  const { loading, error, data, hasNextPage } = useGetData<Character>({
+    endpoint: endpoints.characters,
+    currentPage,
+    characterFilters: { name, status, species, gender, type }
+  });
 
   if (loading) {
     return (
@@ -54,12 +55,10 @@ export default function CharactersList() {
         setIsModalVisible={setIsModalVisible}
         setStatus={setStatus}
         setGender={setGender}
-        name={name}
         setName={setName}
-        species={species}
         setSpecies={setSpecies}
-        type={type}
         setType={setType}
+        setCurrentPage={setCurrentPage}
       />
       <View style={listStyles.filterView}>
         <Pressable onPress={() => setIsModalVisible(true)}>
