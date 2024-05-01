@@ -80,6 +80,12 @@ function RootLayoutNav() {
             title: 'Locations',
           }}
         />
+        <Stack.Screen
+          name='[id]'
+          options={{
+            title: 'Character Details',
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );
