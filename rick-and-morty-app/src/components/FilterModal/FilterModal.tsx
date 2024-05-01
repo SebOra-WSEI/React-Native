@@ -11,9 +11,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
 }) => (
   <Modal animationType='slide' transparent visible={isModalVisible}>
     <View style={styles.centeredView}>
-      <View style={styles.modalView}>
-        {children}
-      </View>
+      <View style={styles.modalView}>{children}</View>
     </View>
   </Modal>
 );

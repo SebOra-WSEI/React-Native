@@ -31,7 +31,7 @@ export default function CharactersList() {
   const { loading, error, data, hasNextPage } = useGetData<Character>({
     endpoint: endpoints.characters,
     currentPage,
-    characterFilters: { name, status, species, gender, type }
+    characterFilters: { name, status, species, gender, type },
   });
 
   if (loading) {

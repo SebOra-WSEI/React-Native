@@ -25,49 +25,47 @@ export const FilterEpisodesModal: React.FC<FilterEpisodesModalProps> = ({
 }) => {
   const [filters, setFilters] = useState<DefaultEpisodeFilters>({
     name,
-    episode
+    episode,
   });
 
   const handleOnPress = (): void => {
-    setName(filters.name)
-    setEpisodeCode(filters.episode)
+    setName(filters.name);
+    setEpisodeCode(filters.episode);
 
     setCurrentPage(1);
     setIsModalVisible(false);
   };
 
-
   return (
-    <FilterModal
-      isModalVisible={isModalVisible}
-    >
+    <FilterModal isModalVisible={isModalVisible}>
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by name ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          name: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            name: value,
+          })
+        }
         defaultValue={name}
       />
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by episode code ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          episode: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            episode: value,
+          })
+        }
         defaultValue={episode}
       />
-      <Pressable
-        style={styles.button}
-        onPress={handleOnPress}
-      >
+      <Pressable style={styles.button} onPress={handleOnPress}>
         <Text style={styles.textStyle}>Filter</Text>
       </Pressable>
     </FilterModal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   button: {

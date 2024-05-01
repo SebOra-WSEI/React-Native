@@ -25,63 +25,64 @@ export const FilterLocationsModal: React.FC<FilterLocationsModalProps> = ({
   setType,
   dimension,
   setDimension,
-  setCurrentPage
+  setCurrentPage,
 }) => {
   const [filters, setFilters] = useState<DefaultLocationFilters>({
     name,
     type,
-    dimension
+    dimension,
   });
 
   const handleOnPress = (): void => {
-    setName(filters.name)
-    setType(filters.type)
-    setDimension(filters.dimension)
+    setName(filters.name);
+    setType(filters.type);
+    setDimension(filters.dimension);
 
     setCurrentPage(1);
     setIsModalVisible(false);
   };
 
   return (
-    <FilterModal
-      isModalVisible={isModalVisible}
-    >
+    <FilterModal isModalVisible={isModalVisible}>
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by name ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          name: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            name: value,
+          })
+        }
         defaultValue={name}
       />
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by type ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          type: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            type: value,
+          })
+        }
         defaultValue={type}
       />
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by dimension ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          dimension: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            dimension: value,
+          })
+        }
         defaultValue={dimension}
       />
-      <Pressable
-        style={styles.button}
-        onPress={handleOnPress}
-      >
+      <Pressable style={styles.button} onPress={handleOnPress}>
         <Text style={styles.textStyle}>Filter</Text>
       </Pressable>
     </FilterModal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -97,4 +98,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-

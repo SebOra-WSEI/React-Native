@@ -25,7 +25,7 @@ export default function LocationsList() {
   const { loading, error, data, hasNextPage } = useGetData<Location>({
     endpoint: endpoints.locations,
     currentPage,
-    locationFilters: { name, type, dimension }
+    locationFilters: { name, type, dimension },
   });
 
   if (loading) {

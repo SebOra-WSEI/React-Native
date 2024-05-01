@@ -24,7 +24,7 @@ export default function EpisodesList() {
   const { loading, error, data, hasNextPage } = useGetData<Episode>({
     endpoint: endpoints.episodes,
     currentPage,
-    episodeFilters: { name, episodeCode }
+    episodeFilters: { name, episodeCode },
   });
 
   if (loading) {

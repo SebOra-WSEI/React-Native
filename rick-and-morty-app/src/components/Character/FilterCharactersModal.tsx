@@ -1,7 +1,11 @@
 import { TextInput, StyleSheet, Pressable, Text } from 'react-native';
 import React, { useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
-import { CharacterGender, CharacterStatus, DefaultCharacterFilters } from '@/src/types/character';
+import {
+  CharacterGender,
+  CharacterStatus,
+  DefaultCharacterFilters,
+} from '@/src/types/character';
 import { modalStyles } from '@/src/styles/modal';
 import { FilterModal } from '../FilterModal/FilterModal';
 
@@ -9,15 +13,15 @@ interface FilterCharactersModalProps {
   isModalVisible: boolean;
   setIsModalVisible: (value: boolean) => void;
   setStatus: (value: CharacterStatus | undefined) => void;
-  status: CharacterStatus | undefined,
+  status: CharacterStatus | undefined;
   setGender: (value: CharacterGender | undefined) => void;
-  gender: CharacterGender | undefined,
+  gender: CharacterGender | undefined;
   setName: (value: string) => void;
   name: string;
   setSpecies: (value: string) => void;
   species: string;
   setType: (value: string) => void;
-  type: string
+  type: string;
   setCurrentPage: (value: number) => void;
 }
 
@@ -34,22 +38,22 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
   species,
   setType,
   type,
-  setCurrentPage
+  setCurrentPage,
 }) => {
   const [filters, setFilters] = useState<DefaultCharacterFilters>({
     name,
     gender,
     status,
     species,
-    type
+    type,
   });
 
   const handleOnPress = (): void => {
     setGender(filters.gender);
     setStatus(filters.status);
-    setName(filters.name)
-    setSpecies(filters.species)
-    setType(filters.type)
+    setName(filters.name);
+    setSpecies(filters.species);
+    setType(filters.type);
 
     setCurrentPage(1);
     setIsModalVisible(false);
@@ -59,10 +63,13 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
     <FilterModal isModalVisible={isModalVisible}>
       <RNPickerSelect
         style={pickerSelectStyles}
-        onValueChange={(value) => setFilters({
-          ...filters,
-          status: value,
-        })} items={Object.entries(CharacterStatus).map(([label, value]) => ({
+        onValueChange={(value) =>
+          setFilters({
+            ...filters,
+            status: value,
+          })
+        }
+        items={Object.entries(CharacterStatus).map(([label, value]) => ({
           label,
           value,
         }))}
@@ -71,10 +78,12 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
       />
       <RNPickerSelect
         style={pickerSelectStyles}
-        onValueChange={(value) => setFilters({
-          ...filters,
-          gender: value,
-        })}
+        onValueChange={(value) =>
+          setFilters({
+            ...filters,
+            gender: value,
+          })
+        }
         items={Object.entries(CharacterGender).map(([label, value]) => ({
           label,
           value,
@@ -85,39 +94,42 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by name ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          name: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            name: value,
+          })
+        }
         defaultValue={filters.name}
       />
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by species ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          species: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            species: value,
+          })
+        }
         defaultValue={filters.species}
       />
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by type ...'
-        onChangeText={(value) => setFilters({
-          ...filters,
-          type: value
-        })}
+        onChangeText={(value) =>
+          setFilters({
+            ...filters,
+            type: value,
+          })
+        }
         defaultValue={filters.type}
       />
-      <Pressable
-        style={styles.button}
-        onPress={handleOnPress}
-      >
+      <Pressable style={styles.button} onPress={handleOnPress}>
         <Text style={styles.textStyle}>Filter</Text>
       </Pressable>
     </FilterModal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   button: {
