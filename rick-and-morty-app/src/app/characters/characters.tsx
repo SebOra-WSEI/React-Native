@@ -6,18 +6,18 @@ import {
   Text,
 } from 'react-native';
 import React, { useState } from 'react';
-import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
-import { ListLoader } from '../components/ListLoader/ListLoader';
-import { UnknownError } from '../components/Error/UnknownError';
-import { useGetData } from '../hooks/useGetData';
+import { CharactersListItem } from '../../components/Character/CharactersListItem';
+import { ListLoader } from '../../components/ListLoader/ListLoader';
+import { UnknownError } from '../../components/Error/UnknownError';
+import { useGetData } from '../../hooks/useGetData';
 import {
   Character,
   CharacterGender,
   CharacterStatus,
-} from '../types/character';
-import { FilterCharactersModal } from '../components/CharactersPage/FilterCharactersModal';
-import { endpoints } from '../utils/endpoints';
-import { listStyles } from '../styles/listStyles';
+} from '../../types/character';
+import { FilterCharactersModal } from '../../components/Character/FilterCharactersModal';
+import { endpoints } from '../../routes/routes';
+import { listStyles } from '../../styles/listStyles';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);

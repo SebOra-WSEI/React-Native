@@ -3,9 +3,10 @@ import React from 'react';
 import { Character } from '@/src/types/character';
 import { listStyles } from '@/src/styles/listStyles';
 import { useRouter } from 'expo-router';
+import { routerBuilder } from '@/src/routes/routes';
 
 interface FlatListItemProps {
-  character: Character;
+  character?: Character;
 }
 
 export const CharactersListItem: React.FC<FlatListItemProps> = ({
@@ -13,7 +14,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
 }) => {
   const router = useRouter();
 
-  const { id, image, name, species, status, gender } = character;
+  const { id, image, name, species, status, gender } = character ?? {};
 
   return (
     <View style={listStyles.view}>
@@ -27,7 +28,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
-          onPress={() => router.navigate(`/${id}`)}
+          onPress={() => router.navigate(routerBuilder.character(String(id)))}
         >
           <Text style={styles.buttonText}>Get details</Text>
         </Pressable>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     marginLeft: 'auto',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   button: {
     borderRadius: 20,
@@ -53,6 +54,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
   },
   buttonText: {
-    color: '#fff'
+    color: '#fff',
   },
 });
