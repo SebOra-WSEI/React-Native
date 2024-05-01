@@ -45,44 +45,52 @@ export default function CharacterDetails() {
         <Text style={styles.name}>{name}</Text>
         <DataTable>
           <DataTable.Header>
-            <DataTable.Title>Status</DataTable.Title>
-            <DataTable.Title>Species</DataTable.Title>
-            <DataTable.Title>Type</DataTable.Title>
+            <TableTitle title='Status' />
+            <TableTitle title='Species' />
+            <TableTitle title='Type' />
           </DataTable.Header>
           <DataTable.Row>
-            <DataTable.Cell>{status}</DataTable.Cell>
-            <DataTable.Cell>{species}</DataTable.Cell>
-            <DataTable.Cell>{type || '-'}</DataTable.Cell>
+            <TableCell value={status} />
+            <TableCell value={species} />
+            <TableCell value={type} />
           </DataTable.Row>
         </DataTable>
         <DataTable style={{ marginTop: 20 }}>
           <DataTable.Header>
-            <DataTable.Title>Gender</DataTable.Title>
-            <DataTable.Title>Origin</DataTable.Title>
-            <DataTable.Title>Location</DataTable.Title>
+            <TableTitle title='Gender' />
+            <TableTitle title='Origin' />
+            <TableTitle title='Location' />
           </DataTable.Header>
           <DataTable.Row>
-            <DataTable.Cell>{gender}</DataTable.Cell>
-            <DataTable.Cell>{origin?.name}</DataTable.Cell>
-            <DataTable.Cell>{location?.name}</DataTable.Cell>
+            <TableCell value={gender} />
+            <TableCell value={origin?.name} />
+            <TableCell value={location?.name} />
           </DataTable.Row>
         </DataTable>
         <DataTable>
           <DataTable.Header>
-            <DataTable.Title>{''}</DataTable.Title>
-            <DataTable.Title>Episodes</DataTable.Title>
-            <DataTable.Title>{''}</DataTable.Title>
+            <TableTitle title='' />
+            <TableTitle title='Episodes' />
+            <TableTitle title='' />
           </DataTable.Header>
           {episode?.map((e) => (
             <DataTable.Row>
-              <DataTable.Cell>{e}</DataTable.Cell>
+              <TableCell value={e} />
             </DataTable.Row>
           ))}
         </DataTable>
       </View>
     </ScrollView>
   );
-}
+};
+
+const TableTitle: React.FC<{ title: string }> = ({ title }) => (
+  <DataTable.Title style={{ justifyContent: 'center' }}>{title}</DataTable.Title>
+);
+
+const TableCell: React.FC<{ value?: string }> = ({ value }) => (
+  <DataTable.Cell style={{ justifyContent: 'center' }}>{value || '-'}</DataTable.Cell>
+);
 
 const styles = StyleSheet.create({
   container: {
