@@ -7,6 +7,7 @@ import { listStyles } from "../../styles/listStyles";
 import { UnknownError } from "../../components/Error/UnknownError";
 import { useGetDataById } from "../../hooks/useGetDataById";
 import { DataTable } from "react-native-paper";
+import { EpisodeName } from "./EpisodeName";
 
 export default function CharacterDetails() {
   const { id } = useLocalSearchParams();
@@ -75,7 +76,7 @@ export default function CharacterDetails() {
           </DataTable.Header>
           {episode?.map((e) => (
             <DataTable.Row key={e}>
-              <TableCell value={e} />
+              <EpisodeName id={e.slice(e.lastIndexOf('/') + 1)} />
             </DataTable.Row>
           ))}
         </DataTable>

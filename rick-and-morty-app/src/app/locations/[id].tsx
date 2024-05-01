@@ -53,7 +53,9 @@ export default function LocationDetails() {
           </DataTable.Header>
           {residents?.map((r) => (
             <DataTable.Row key={r}>
-              <Resident id={r.slice(r.lastIndexOf('/') + 1)} />
+              <DataTable.Cell>
+                <Resident id={r.slice(r.lastIndexOf('/') + 1)} />
+              </DataTable.Cell>
             </DataTable.Row>
           ))}
         </DataTable>
