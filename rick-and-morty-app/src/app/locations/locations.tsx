@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native';
 import { useGetData } from '../../hooks/useGetData';
-import { endpoints } from '../../utils/endpoints';
+import { endpoints } from '../../routes/routes';
 import { Location } from '../../types/location';
 import { UnknownError } from '../../components/Error/UnknownError';
 import { ListLoader } from '../../components/ListLoader/ListLoader';

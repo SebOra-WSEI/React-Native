@@ -16,7 +16,7 @@ import {
   CharacterStatus,
 } from '../../types/character';
 import { FilterCharactersModal } from '../../components/CharactersPage/FilterCharactersModal';
-import { endpoints } from '../../utils/endpoints';
+import { endpoints } from '../../routes/routes';
 import { listStyles } from '../../styles/listStyles';
 
 export default function CharactersList() {

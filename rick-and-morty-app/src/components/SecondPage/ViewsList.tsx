@@ -1,7 +1,8 @@
 import { Text, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
-import { Link } from 'expo-router';
+import { Href, Link } from 'expo-router';
 import { ViewType } from '@/src/types/view';
+import { routeBuilder } from '@/src/routes/routes';
 
 interface ViewsListProps {
   view: ViewType;
@@ -12,7 +13,7 @@ export const ViewsList: React.FC<ViewsListProps> = ({ view }) => {
 
   return (
     <Pressable style={styles.item}>
-      <Link href={`/${view}/${view}`}>
+      <Link href={routeBuilder[view]}>
         <Text style={styles.itemTitle}>{displayedTitle}</Text>
       </Link>
     </Pressable>

@@ -6,7 +6,7 @@ import {
   Pressable,
   FlatList,
 } from 'react-native';
-import { endpoints } from '../../utils/endpoints';
+import { endpoints } from '../../routes/routes';
 import { useGetData } from '../../hooks/useGetData';
 import { Episode } from '../../types/episode';
 import { listStyles } from '../../styles/listStyles';

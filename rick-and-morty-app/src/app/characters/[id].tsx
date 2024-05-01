@@ -2,7 +2,7 @@ import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View, StyleSheet, Image, Text, ActivityIndicator, StatusBar, ScrollView } from "react-native";
 import { Character } from "../../types/character";
-import { endpoints } from "../../utils/endpoints";
+import { endpoints } from "../../routes/routes";
 import { listStyles } from "../../styles/listStyles";
 import { UnknownError } from "../../components/Error/UnknownError";
 import { useGetDataById } from "../../hooks/useGetDataById";
