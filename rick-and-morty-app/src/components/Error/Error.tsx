@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export const UnknownError: React.FC = () => (
+export const Error: React.FC<{ errorMsg: string }> = ({ errorMsg }) => (
   <View style={styles.view}>
-    <Text style={styles.text}>Unknown Error</Text>
+    <Text style={styles.text}>{errorMsg}</Text>
   </View>
 );
 

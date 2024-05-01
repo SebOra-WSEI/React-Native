@@ -8,7 +8,7 @@ import {
 import React, { useState } from 'react';
 import { CharactersListItem } from '../../components/Character/CharactersListItem';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
-import { UnknownError } from '../../components/Error/UnknownError';
+import { Error } from '../../components/Error/Error';
 import { useGetData } from '../../hooks/useGetData';
 import {
   Character,
@@ -28,10 +28,11 @@ export default function CharactersList() {
   const [type, setType] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const { loading, error, data, hasNextPage } = useGetData<Character>(
-    endpoints.characters,
-    currentPage
-  );
+  const { loading, error, data, hasNextPage } = useGetData<Character>({
+    endpoint: endpoints.characters,
+    currentPage,
+    characterFilters: { name, status, species, gender, type },
+  });
 
   if (loading) {
     return (
@@ -42,7 +43,7 @@ export default function CharactersList() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
@@ -53,13 +54,16 @@ export default function CharactersList() {
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         setStatus={setStatus}
+        status={status}
         setGender={setGender}
-        name={name}
+        gender={gender}
         setName={setName}
-        species={species}
+        name={name}
         setSpecies={setSpecies}
-        type={type}
+        species={species}
         setType={setType}
+        type={type}
+        setCurrentPage={setCurrentPage}
       />
       <View style={listStyles.filterView}>
         <Pressable onPress={() => setIsModalVisible(true)}>

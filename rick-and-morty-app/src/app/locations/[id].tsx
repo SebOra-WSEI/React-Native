@@ -1,5 +1,5 @@
 import { CommonDetailsPage } from '@/src/components/Details/CommonDetailsPage';
-import { UnknownError } from '@/src/components/Error/UnknownError';
+import { Error } from '@/src/components/Error/Error';
 import { Resident } from '@/src/components/Location/Resident';
 import { TableCell } from '@/src/components/Table/TableCell';
 import { TableTitle } from '@/src/components/Table/TableTitle';
@@ -31,7 +31,7 @@ export default function LocationDetails() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const { name, type, dimension, residents } = data ?? {};

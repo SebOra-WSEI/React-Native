@@ -7,3 +7,9 @@ export interface Location {
   url: string;
   created: string;
 }
+
+export interface DefaultLocationFilters {
+  name: string;
+  type: string;
+  dimension: string;
+}

@@ -1,4 +1,4 @@
-import { UnknownError } from '@/src/components/Error/UnknownError';
+import { Error } from '@/src/components/Error/Error';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { useGetPrevScreen } from '@/src/hooks/useGetPrevScreen';
 import { endpoints, routerBuilder } from '@/src/routes/routes';
@@ -35,7 +35,7 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   return (

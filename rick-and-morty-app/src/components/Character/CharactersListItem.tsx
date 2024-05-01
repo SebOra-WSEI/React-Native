@@ -14,7 +14,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
 }) => {
   const router = useRouter();
 
-  const { id, image, name, species, status, gender } = character ?? {};
+  const { id, image, name, species, status, gender, type } = character ?? {};
 
   return (
     <View style={listStyles.view}>
@@ -24,6 +24,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
         <Text style={listStyles.secondText}>Species: {species}</Text>
         <Text style={listStyles.secondText}>Status: {status}</Text>
         <Text style={listStyles.secondText}>Gender: {gender}</Text>
+        <Text style={listStyles.secondText}>Type: {type || '-'}</Text>
       </View>
       <View style={styles.buttonView}>
         <Pressable

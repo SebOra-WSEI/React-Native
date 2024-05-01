@@ -1,4 +1,4 @@
-import { UnknownError } from '@/src/components/Error/UnknownError';
+import { Error } from '@/src/components/Error/Error';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { endpoints, routerBuilder } from '@/src/routes/routes';
 import { listStyles } from '@/src/styles/listStyles';
@@ -34,7 +34,7 @@ export const EpisodeName: React.FC<{ id: string }> = ({ id }) => {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   return (

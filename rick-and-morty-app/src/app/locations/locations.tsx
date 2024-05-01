@@ -9,7 +9,7 @@ import {
 import { useGetData } from '../../hooks/useGetData';
 import { endpoints } from '../../routes/routes';
 import { Location } from '../../types/location';
-import { UnknownError } from '../../components/Error/UnknownError';
+import { Error } from '../../components/Error/Error';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
 import { LocationsListItem } from '../../components/Location/LocationsListItem';
 import { listStyles } from '../../styles/listStyles';
@@ -22,10 +22,11 @@ export default function LocationsList() {
   const [type, setType] = useState<string>('');
   const [dimension, setDimension] = useState<string>('');
 
-  const { loading, error, data, hasNextPage } = useGetData<Location>(
-    endpoints.locations,
-    currentPage
-  );
+  const { loading, error, data, hasNextPage } = useGetData<Location>({
+    endpoint: endpoints.locations,
+    currentPage,
+    locationFilters: { name, type, dimension },
+  });
 
   if (loading) {
     return (
@@ -36,7 +37,7 @@ export default function LocationsList() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
@@ -52,6 +53,7 @@ export default function LocationsList() {
         setType={setType}
         dimension={dimension}
         setDimension={setDimension}
+        setCurrentPage={setCurrentPage}
       />
       <View style={listStyles.filterView}>
         <Pressable onPress={() => setIsModalVisible(true)}>

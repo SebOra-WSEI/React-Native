@@ -1,6 +1,7 @@
 export interface QueryResponse<T> {
-  info: Info;
+  info?: Info;
   results: Array<T>;
+  error?: string;
 }
 
 interface Info {
