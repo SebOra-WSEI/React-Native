@@ -92,6 +92,12 @@ function RootLayoutNav() {
             title: 'Location Details',
           }}
         />
+        <Stack.Screen
+          name='episodes/[id]'
+          options={{
+            title: 'Episode Details',
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

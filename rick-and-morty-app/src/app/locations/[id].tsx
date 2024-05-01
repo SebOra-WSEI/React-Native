@@ -1,5 +1,7 @@
 import { UnknownError } from "@/src/components/Error/UnknownError";
 import { Resident } from "@/src/components/Location/Resident";
+import { TableCell } from "@/src/components/Table/TableCell";
+import { TableTitle } from "@/src/components/Table/TableTitle";
 import { useGetDataById } from "@/src/hooks/useGetDataById";
 import { endpoints } from "@/src/routes/routes";
 import { listStyles } from "@/src/styles/listStyles";
@@ -39,17 +41,17 @@ export default function LocationDetails() {
         <Text style={styles.name}>{name}</Text>
         <DataTable>
           <DataTable.Header>
-            <DataTable.Title style={styles.title}>Type</DataTable.Title>
-            <DataTable.Title style={styles.title}>Dimension</DataTable.Title>
+            <TableTitle title="Type" />
+            <TableTitle title="Dimension" />
           </DataTable.Header>
           <DataTable.Row>
-            <DataTable.Cell style={styles.title}>{type}</DataTable.Cell>
-            <DataTable.Cell style={styles.title}>{dimension}</DataTable.Cell>
+            <TableCell value={type} />
+            <TableCell value={dimension} />
           </DataTable.Row>
         </DataTable>
         <DataTable>
           <DataTable.Header>
-            <DataTable.Title style={styles.title}>Residents</DataTable.Title>
+            <TableTitle title="Residents" />
           </DataTable.Header>
           {residents?.map((r) => (
             <DataTable.Row key={r}>

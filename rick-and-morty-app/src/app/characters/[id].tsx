@@ -8,6 +8,8 @@ import { UnknownError } from "../../components/Error/UnknownError";
 import { useGetDataById } from "../../hooks/useGetDataById";
 import { DataTable } from "react-native-paper";
 import { EpisodeName } from "./EpisodeName";
+import { TableTitle } from "@/src/components/Table/TableTitle";
+import { TableCell } from "@/src/components/Table/TableCell";
 
 export default function CharacterDetails() {
   const { id } = useLocalSearchParams();
@@ -84,14 +86,6 @@ export default function CharacterDetails() {
     </ScrollView>
   );
 };
-
-const TableTitle: React.FC<{ title: string }> = ({ title }) => (
-  <DataTable.Title style={{ justifyContent: 'center' }}>{title}</DataTable.Title>
-);
-
-const TableCell: React.FC<{ value?: string }> = ({ value }) => (
-  <DataTable.Cell style={{ justifyContent: 'center' }}>{value || '-'}</DataTable.Cell>
-);
 
 const styles = StyleSheet.create({
   container: {
