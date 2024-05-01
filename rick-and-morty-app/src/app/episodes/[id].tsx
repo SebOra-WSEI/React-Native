@@ -1,23 +1,25 @@
-import { useLocalSearchParams } from "expo-router";
-import React from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
-import { endpoints } from "../../routes/routes";
-import { listStyles } from "../../styles/listStyles";
-import { UnknownError } from "../../components/Error/UnknownError";
-import { useGetDataById } from "../../hooks/useGetDataById";
-import { Episode } from "@/src/types/episode";
-import { DataTable } from "react-native-paper";
-import { TableTitle } from "@/src/components/Table/TableTitle";
-import { Resident } from "@/src/components/Location/Resident";
-import { detailsPageStyles } from "@/src/styles/details";
-import { CommonDetailsPage } from "@/src/components/Details/CommonDetailsPage";
-import { EPISODE_IMAGE_URL } from "@/src/constants/images";
+import { useLocalSearchParams } from 'expo-router';
+import React from 'react';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { endpoints } from '../../routes/routes';
+import { listStyles } from '../../styles/listStyles';
+import { UnknownError } from '../../components/Error/UnknownError';
+import { useGetDataById } from '../../hooks/useGetDataById';
+import { Episode } from '@/src/types/episode';
+import { DataTable } from 'react-native-paper';
+import { TableTitle } from '@/src/components/Table/TableTitle';
+import { Resident } from '@/src/components/Location/Resident';
+import { detailsPageStyles } from '@/src/styles/details';
+import { CommonDetailsPage } from '@/src/components/Details/CommonDetailsPage';
+import { EPISODE_IMAGE_URL } from '@/src/constants/images';
 
 export default function LocationDetails() {
   const { id } = useLocalSearchParams();
 
-  const { loading, error, data } =
-    useGetDataById<Episode>(endpoints.episodes, id as string);
+  const { loading, error, data } = useGetDataById<Episode>(
+    endpoints.episodes,
+    id as string
+  );
 
   if (loading) {
     return (
@@ -31,12 +33,7 @@ export default function LocationDetails() {
     return <UnknownError />;
   }
 
-  const {
-    name,
-    air_date,
-    episode,
-    characters
-  } = data ?? {};
+  const { name, air_date, episode, characters } = data ?? {};
 
   return (
     <CommonDetailsPage imageUrl={EPISODE_IMAGE_URL}>
@@ -55,10 +52,10 @@ export default function LocationDetails() {
       </DataTable>
     </CommonDetailsPage>
   );
-};
+}
 
 const styles = StyleSheet.create({
   dataTable: {
-    marginTop: 15
-  }
+    marginTop: 15,
+  },
 });

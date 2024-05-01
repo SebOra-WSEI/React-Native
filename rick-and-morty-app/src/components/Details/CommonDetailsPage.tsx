@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from "react";
-import { View, Image, ScrollView } from "react-native";
-import { detailsPageStyles } from "@/src/styles/details";
+import React, { PropsWithChildren } from 'react';
+import { View, Image, ScrollView } from 'react-native';
+import { detailsPageStyles } from '@/src/styles/details';
 
 interface CommonDetailsPageProps extends PropsWithChildren {
   imageUrl: string;
@@ -8,14 +8,11 @@ interface CommonDetailsPageProps extends PropsWithChildren {
 
 export const CommonDetailsPage: React.FC<CommonDetailsPageProps> = ({
   imageUrl,
-  children
+  children,
 }) => (
   <ScrollView>
     <View style={detailsPageStyles.container}>
-      <Image
-        style={detailsPageStyles.img}
-        source={{ uri: imageUrl }}
-      />
+      <Image style={detailsPageStyles.img} source={{ uri: imageUrl }} />
       {children}
     </View>
   </ScrollView>

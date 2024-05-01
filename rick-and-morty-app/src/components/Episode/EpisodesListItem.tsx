@@ -20,11 +20,7 @@ export const EpisodesListItem: React.FC<EpisodesListItemProps> = ({
   return (
     <View style={listStyles.view}>
       <View>
-        <FontAwesome
-          name='file-movie-o'
-          size={19}
-          style={styles.episodeIcon}
-        />
+        <FontAwesome name='file-movie-o' size={19} style={styles.episodeIcon} />
       </View>
       <View style={styles.itemView}>
         <Text style={listStyles.name}>{name}</Text>
@@ -53,13 +49,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
   },
   buttonText: {
-    color: '#fff'
+    color: '#fff',
   },
   episodeIcon: {
     marginRight: 10,
     marginVertical: 9,
   },
   itemView: {
-    width: 250
-  }
+    width: 250,
+  },
 });

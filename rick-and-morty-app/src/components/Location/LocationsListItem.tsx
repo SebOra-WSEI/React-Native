@@ -46,7 +46,7 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
 const styles = StyleSheet.create({
   buttonView: {
     marginLeft: 'auto',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   button: {
     borderRadius: 20,
@@ -54,12 +54,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
   },
   buttonText: {
-    color: '#fff'
+    color: '#fff',
   },
   locationIcon: {
     color: '#2196F3',
     marginRight: 10,
     marginVertical: 2,
-  }
+  },
 });
-

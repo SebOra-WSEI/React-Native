@@ -1,4 +1,3 @@
-
 import { StatusBar, StyleSheet } from 'react-native';
 
 export const detailsPageStyles = StyleSheet.create({
@@ -10,7 +9,7 @@ export const detailsPageStyles = StyleSheet.create({
   img: {
     height: 200,
     width: 200,
-    borderRadius: 100
+    borderRadius: 100,
   },
   name: {
     fontSize: 20,
@@ -18,6 +17,6 @@ export const detailsPageStyles = StyleSheet.create({
     marginTop: 10,
   },
   title: {
-    justifyContent: 'center'
-  }
-})
+    justifyContent: 'center',
+  },
+});

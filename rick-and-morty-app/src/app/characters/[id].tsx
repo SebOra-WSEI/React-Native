@@ -1,23 +1,25 @@
-import { useLocalSearchParams } from "expo-router";
-import React from "react";
-import { View, Text, ActivityIndicator } from "react-native";
-import { Character } from "../../types/character";
-import { endpoints } from "../../routes/routes";
-import { listStyles } from "../../styles/listStyles";
-import { UnknownError } from "../../components/Error/UnknownError";
-import { useGetDataById } from "../../hooks/useGetDataById";
-import { DataTable } from "react-native-paper";
-import { EpisodeName } from "./EpisodeName";
-import { TableTitle } from "@/src/components/Table/TableTitle";
-import { TableCell } from "@/src/components/Table/TableCell";
-import { detailsPageStyles } from "@/src/styles/details";
-import { CommonDetailsPage } from "@/src/components/Details/CommonDetailsPage";
+import { useLocalSearchParams } from 'expo-router';
+import React from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
+import { Character } from '../../types/character';
+import { endpoints } from '../../routes/routes';
+import { listStyles } from '../../styles/listStyles';
+import { UnknownError } from '../../components/Error/UnknownError';
+import { useGetDataById } from '../../hooks/useGetDataById';
+import { DataTable } from 'react-native-paper';
+import { EpisodeName } from './EpisodeName';
+import { TableTitle } from '@/src/components/Table/TableTitle';
+import { TableCell } from '@/src/components/Table/TableCell';
+import { detailsPageStyles } from '@/src/styles/details';
+import { CommonDetailsPage } from '@/src/components/Details/CommonDetailsPage';
 
 export default function CharacterDetails() {
   const { id } = useLocalSearchParams();
 
-  const { loading, error, data } =
-    useGetDataById<Character>(endpoints.characters, id as string);
+  const { loading, error, data } = useGetDataById<Character>(
+    endpoints.characters,
+    id as string
+  );
 
   if (loading) {
     return (
@@ -40,7 +42,7 @@ export default function CharacterDetails() {
     origin,
     location,
     episode,
-    type
+    type,
   } = data ?? {};
 
   return (
@@ -84,4 +86,4 @@ export default function CharacterDetails() {
       </DataTable>
     </CommonDetailsPage>
   );
-};
+}
