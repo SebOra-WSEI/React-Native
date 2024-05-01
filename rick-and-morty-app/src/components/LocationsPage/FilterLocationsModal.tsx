@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import { FilterModal } from '../FilterModal/FIlterModal';
+import { modalStyles } from '@/src/styles/modal';
 
 interface FilterLocationsModalProps {
   isModalVisible: boolean;
@@ -31,35 +32,22 @@ export const FilterLocationsModal: React.FC<FilterLocationsModalProps> = ({
     setIsModalVisible={setIsModalVisible}
   >
     <TextInput
-      style={styles.input}
+      style={modalStyles.input}
       placeholder='Filter by name ...'
       onChangeText={(value) => setName(value)}
       defaultValue={name}
     />
     <TextInput
-      style={styles.input}
+      style={modalStyles.input}
       placeholder='Filter by type ...'
       onChangeText={(value) => setType(value)}
       defaultValue={type}
     />
     <TextInput
-      style={styles.input}
+      style={modalStyles.input}
       placeholder='Filter by dimension ...'
       onChangeText={(value) => setDimension(value)}
       defaultValue={dimension}
     />
   </FilterModal>
 );
-
-const styles = StyleSheet.create({
-  input: {
-    textAlign: 'center',
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingHorizontal: 40,
-    paddingVertical: 10,
-    marginVertical: 5,
-    fontSize: 14,
-    borderColor: '#777',
-  },
-});

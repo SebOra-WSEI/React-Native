@@ -5,7 +5,8 @@ import {
 import React from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { CharacterGender, CharacterStatus } from '@/src/types/character';
-import { FilterModal } from '../FilterModal/FIlterModal';
+import { modalStyles } from '@/src/styles/modal';
+import { FilterModal } from '../FilterModal/FilterModal';
 
 interface FilterCharactersModalProps {
   isModalVisible: boolean;
@@ -55,38 +56,25 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
       placeholder={{ label: 'Filter by gender ...' }}
     />
     <TextInput
-      style={styles.input}
+      style={modalStyles.input}
       placeholder='Filter by name ...'
       onChangeText={(value) => setName(value)}
       defaultValue={name}
     />
     <TextInput
-      style={styles.input}
+      style={modalStyles.input}
       placeholder='Filter by species ...'
       onChangeText={(value) => setSpecies(value)}
       defaultValue={species}
     />
     <TextInput
-      style={styles.input}
+      style={modalStyles.input}
       placeholder='Filter by type ...'
       onChangeText={(value) => setType(value)}
       defaultValue={type}
     />
   </FilterModal>
 );
-
-const styles = StyleSheet.create({
-  input: {
-    textAlign: 'center',
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingHorizontal: 40,
-    paddingVertical: 10,
-    marginVertical: 5,
-    fontSize: 14,
-    borderColor: '#777',
-  },
-});
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
