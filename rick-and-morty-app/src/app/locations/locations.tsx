@@ -24,8 +24,8 @@ export default function LocationsList() {
 
   const { loading, error, data, hasNextPage } = useGetData<Location>({
     endpoint: endpoints.locations,
-    currentPage
-
+    currentPage,
+    locationFilters: { name, type, dimension }
   });
 
   if (loading) {
@@ -53,6 +53,7 @@ export default function LocationsList() {
         setType={setType}
         dimension={dimension}
         setDimension={setDimension}
+        setCurrentPage={setCurrentPage}
       />
       <View style={listStyles.filterView}>
         <Pressable onPress={() => setIsModalVisible(true)}>

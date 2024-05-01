@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { QueryResponse } from '../types/response';
 import { DefaultCharacterFilters } from '../types/character';
+import { DefaultLocationFilters } from '../types/location';
 
 interface UseGetDataResult<T> {
   loading: boolean;
@@ -13,12 +14,14 @@ interface useGetDataArgs {
   endpoint: string;
   currentPage: number;
   characterFilters?: DefaultCharacterFilters;
+  locationFilters?: DefaultLocationFilters;
 }
 
 export function useGetData<T>({
   endpoint,
   currentPage,
   characterFilters,
+  locationFilters,
 }: useGetDataArgs): UseGetDataResult<Array<T>> {
   const [data, setData] = useState<Array<T>>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,24 +33,41 @@ export function useGetData<T>({
     species,
     status,
     gender,
-    type,
+    type: characterType,
   } = characterFilters ?? {};
 
-  const nameQueryFilter = characterName ? `&name=${characterName}` : '';
+  const characterNameQueryFilter = characterName
+    ? `&name=${characterName}`
+    : '';
   const speciesQueryFilter = species ? `&species=${species}` : '';
   const statusQueryFilter = status ? `&status=${status}` : '';
   const genderQueryFilter = gender ? `&gender=${gender}` : '';
-  const typeQueryFilter = type ? `&type=${type}` : '';
+  const characterTypeQueryFilter = characterType
+    ? `&type=${characterType}`
+    : '';
+
+  const {
+    name: locationName,
+    type: locationType,
+    dimension,
+  } = locationFilters ?? {};
+
+  const locationNameQueryFilter = locationName ? `&name=${locationName}` : '';
+  const locationTypeQueryFilter = locationType ? `&type=${locationType}` : '';
+  const dimensionNameQueryFilter = dimension ? `&dimension=${dimension}` : '';
 
   const fetchData = async (page: number) => {
     await fetch(
       `${endpoint}?page=
       ${page}
-      ${nameQueryFilter}
+      ${characterNameQueryFilter}
       ${statusQueryFilter}
       ${genderQueryFilter}
-      ${typeQueryFilter}
-      ${speciesQueryFilter}`
+      ${characterTypeQueryFilter}
+      ${speciesQueryFilter}
+      ${locationNameQueryFilter}
+      ${locationTypeQueryFilter}
+      ${dimensionNameQueryFilter}`
     )
       .then((res) => res.json())
       .then((res: QueryResponse<T>) => {
@@ -69,7 +89,17 @@ export function useGetData<T>({
 
   useEffect(() => {
     fetchData(currentPage);
-  }, [currentPage, characterName, species, status, gender, type]);
+  }, [
+    currentPage,
+    characterName,
+    species,
+    status,
+    gender,
+    characterType,
+    locationName,
+    locationType,
+    dimension,
+  ]);
 
   return {
     loading,

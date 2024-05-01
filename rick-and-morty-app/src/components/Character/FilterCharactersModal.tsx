@@ -1,7 +1,7 @@
 import { TextInput, StyleSheet, Pressable, Text } from 'react-native';
 import React, { useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
-import { CharacterGender, CharacterStatus, DefaultCharacterFilters, defaultCharacterFilters } from '@/src/types/character';
+import { CharacterGender, CharacterStatus, DefaultCharacterFilters } from '@/src/types/character';
 import { modalStyles } from '@/src/styles/modal';
 import { FilterModal } from '../FilterModal/FilterModal';
 
@@ -44,15 +44,14 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
     type
   });
 
-  console.log(filters)
   const handleOnPress = (): void => {
     setGender(filters.gender);
     setStatus(filters.status);
     setName(filters.name)
     setSpecies(filters.species)
     setType(filters.type)
-    setCurrentPage(1);
 
+    setCurrentPage(1);
     setIsModalVisible(false);
   };
 

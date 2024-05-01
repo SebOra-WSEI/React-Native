@@ -48,11 +48,3 @@ export interface DefaultCharacterFilters {
   species: string;
   type: string;
 }
-
-export const defaultCharacterFilters: DefaultCharacterFilters = {
-  status: undefined,
-  gender: undefined,
-  name: '',
-  species: '',
-  type: '',
-};
