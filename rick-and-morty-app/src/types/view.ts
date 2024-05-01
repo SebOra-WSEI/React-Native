@@ -1,1 +1,1 @@
-export type ViewType = 'character' | 'location' | 'episode';
+export type ViewType = 'characters' | 'locations' | 'episodes';

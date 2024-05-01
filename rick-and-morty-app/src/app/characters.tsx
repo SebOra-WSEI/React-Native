@@ -2,18 +2,22 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-  StyleSheet,
   Pressable,
   Text,
-  Button,
 } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
-import { Loader } from '../components/Loader/Loader';
+import { ListLoader } from '../components/ListLoader/ListLoader';
 import { UnknownError } from '../components/Error/UnknownError';
-import { useGetCharacters } from '../hooks/useGetCharacters';
-import { CharacterGender, CharacterStatus } from '../types/character';
+import { useGetData } from '../hooks/useGetData';
+import {
+  Character,
+  CharacterGender,
+  CharacterStatus,
+} from '../types/character';
 import { FilterCharactersModal } from '../components/CharactersPage/FilterCharactersModal';
+import { endpoints } from '../utils/endpoints';
+import { listStyles } from '../styles/listStyles';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -24,13 +28,14 @@ export default function CharactersList() {
   const [type, setType] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const { loading, error, data, hasNextPage } = useGetCharacters(currentPage);
-
-  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
+  const { loading, error, data, hasNextPage } = useGetData<Character>(
+    endpoints.characters,
+    currentPage
+  );
 
   if (loading) {
     return (
-      <View style={styles.view}>
+      <View style={listStyles.loader}>
         <ActivityIndicator size='large' />
       </View>
     );
@@ -39,6 +44,8 @@ export default function CharactersList() {
   if (error) {
     return <UnknownError />;
   }
+
+  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
   return (
     <View>
@@ -54,33 +61,18 @@ export default function CharactersList() {
         type={type}
         setType={setType}
       />
-      <View style={styles.filterView}>
+      <View style={listStyles.filterView}>
         <Pressable onPress={() => setIsModalVisible(true)}>
-          <Text style={styles.filterText}>Filter</Text>
+          <Text style={listStyles.filterText}>Filter</Text>
         </Pressable>
       </View>
       <FlatList
         data={data}
         renderItem={({ item }) => <CharactersListItem character={item} />}
         keyExtractor={(item, index) => String(item.id) + index}
-        ListFooterComponent={hasNextPage ? <Loader /> : null}
+        ListFooterComponent={hasNextPage ? <ListLoader /> : null}
         onEndReached={loadMoreData}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  filterView: {
-    alignItems: 'flex-end',
-    marginHorizontal: 20,
-    marginVertical: 15,
-  },
-  filterText: {
-    color: '#2196F3',
-  },
-  view: {
-    justifyContent: 'center',
-    flex: 1,
-  },
-});

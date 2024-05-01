@@ -1,22 +1,28 @@
 import { useEffect, useState } from 'react';
-import { Character } from '../types/character';
-import { CharacterResponse, QueryResponse } from '../types/response';
-import { ApiURL } from '../constants/api';
+import { QueryResponse } from '../types/response';
 
-export const useGetCharacters = (
+interface UseGetDataResult<T> {
+  loading: boolean;
+  error: boolean;
+  data: T;
+  hasNextPage: boolean;
+}
+
+export function useGetData<T>(
+  endpoint: string,
   currentPage: number
-): QueryResponse<Array<Character>> => {
-  const [characters, setCharacters] = useState<Array<Character>>([]);
+): UseGetDataResult<Array<T>> {
+  const [data, setData] = useState<Array<T>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
 
   const fetchData = async (page: number) => {
-    await fetch(`${ApiURL}?page=${page}`)
+    await fetch(`${endpoint}?page=${page}`)
       .then((res) => res.json())
-      .then((res: CharacterResponse) => {
+      .then((res: QueryResponse<T>) => {
         setHasNextPage(!!res.info.next);
-        setCharacters([...characters, ...res.results]);
+        setData([...data, ...res.results]);
         setLoading(false);
       })
       .catch((err) => {
@@ -32,7 +38,7 @@ export const useGetCharacters = (
   return {
     loading,
     error,
-    data: characters,
+    data,
     hasNextPage,
   };
-};
+}
