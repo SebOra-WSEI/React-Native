@@ -1,8 +1,8 @@
 import { UnknownError } from "@/src/components/Error/UnknownError";
+import { Resident } from "@/src/components/Location/Resident";
 import { useGetDataById } from "@/src/hooks/useGetDataById";
 import { endpoints } from "@/src/routes/routes";
 import { listStyles } from "@/src/styles/listStyles";
-import { Character } from "@/src/types/character";
 import { Location } from "@/src/types/location";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
@@ -61,50 +61,6 @@ export default function LocationDetails() {
     </ScrollView>
   )
 };
-
-const Resident: React.FC<{ id: string }> = ({ id }) => {
-  const { loading, error, data } =
-    useGetDataById<Character>(endpoints.characters, id);
-
-  if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
-  }
-
-  if (error) {
-    return <UnknownError />;
-  }
-
-  return (
-    <View style={{
-      flexDirection: 'row',
-      paddingVertical: 10,
-      alignItems: 'center',
-    }}>
-      <Image style={{
-        height: 80,
-        width: 80,
-        borderRadius: 100,
-      }} source={{ uri: data?.image }} />
-      <View style={{
-        marginLeft: 10
-      }}>
-        <Text style={{
-          fontSize: 14,
-          fontWeight: 'bold',
-        }}>
-          {data?.name}
-        </Text>
-        <Text style={listStyles.secondText}>Species: {data?.species}</Text>
-        <Text style={listStyles.secondText}>Status: {data?.status}</Text>
-        <Text style={listStyles.secondText}>Gender: {data?.gender}</Text>
-      </View>
-    </View>
-  )
-}
 
 const styles = StyleSheet.create({
   container: {

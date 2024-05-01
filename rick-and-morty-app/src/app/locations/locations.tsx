@@ -11,9 +11,9 @@ import { endpoints } from '../../routes/routes';
 import { Location } from '../../types/location';
 import { UnknownError } from '../../components/Error/UnknownError';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
-import { LocationsListItem } from '../../components/LocationsPage/LocationsListItem';
+import { LocationsListItem } from '../../components/Location/LocationsListItem';
 import { listStyles } from '../../styles/listStyles';
-import { FilterLocationsModal } from '../../components/LocationsPage/FilterLocationsModal';
+import { FilterLocationsModal } from '../../components/Location/FilterLocationsModal';
 
 export default function LocationsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);

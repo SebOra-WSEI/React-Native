@@ -12,8 +12,8 @@ import { Episode } from '../../types/episode';
 import { listStyles } from '../../styles/listStyles';
 import { UnknownError } from '../../components/Error/UnknownError';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
-import { EpisodesListItem } from '../../components/EpisodesPage/EpisodesListItem';
-import { FilterEpisodesModal } from '../../components/EpisodesPage/FilterEpisodesModal';
+import { FilterEpisodesModal } from '../../components/Episode/FilterEpisodesModal';
+import { EpisodesListItem } from '@/src/components/Episode/EpisodesListItem';
 
 export default function EpisodesList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
