@@ -14,18 +14,6 @@ export default function CharacterDetails() {
   const { loading, error, data } =
     useGetDataById<Character>(endpoints.characters, id as string);
 
-  const {
-    image,
-    name,
-    status,
-    species,
-    gender,
-    origin,
-    location,
-    episode,
-    type
-  } = data ?? {};
-
   if (loading) {
     return (
       <View style={listStyles.loader}>
@@ -37,6 +25,18 @@ export default function CharacterDetails() {
   if (error) {
     return <UnknownError />;
   }
+
+  const {
+    image,
+    name,
+    status,
+    species,
+    gender,
+    origin,
+    location,
+    episode,
+    type
+  } = data ?? {};
 
   return (
     <ScrollView>

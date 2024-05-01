@@ -5,7 +5,7 @@ import { listStyles } from '@/src/styles/listStyles';
 import { useRouter } from 'expo-router';
 
 interface FlatListItemProps {
-  character: Character;
+  character?: Character;
 }
 
 export const CharactersListItem: React.FC<FlatListItemProps> = ({
@@ -13,7 +13,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
 }) => {
   const router = useRouter();
 
-  const { id, image, name, species, status, gender } = character;
+  const { id, image, name, species, status, gender } = character ?? {};
 
   return (
     <View style={listStyles.view}>

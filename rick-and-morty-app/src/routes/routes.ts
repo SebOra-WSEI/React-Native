@@ -6,7 +6,7 @@ export const endpoints = {
   episodes: `${ApiUrl}/episode`,
 } as const;
 
-export const routeBuilder = {
+export const routerBuilder = {
   characters: '/characters/characters',
   locations: '/locations/locations',
   episodes: '/episodes/episodes',
