@@ -1,9 +1,6 @@
-import {
-  TextInput,
-  StyleSheet,
-} from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
 import React from 'react';
-import { FilterModal } from '../FilterModal/FIlterModal';
+import { FilterModal } from '../FilterModal/FilterModal';
 import { modalStyles } from '@/src/styles/modal';
 
 interface FilterLocationsModalProps {
@@ -25,7 +22,7 @@ export const FilterLocationsModal: React.FC<FilterLocationsModalProps> = ({
   type,
   setType,
   dimension,
-  setDimension
+  setDimension,
 }) => (
   <FilterModal
     isModalVisible={isModalVisible}

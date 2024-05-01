@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { View, Text, ActivityIndicator, Pressable, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Pressable,
+  FlatList,
+} from 'react-native';
 import { endpoints } from '../utils/endpoints';
 import { useGetData } from '../hooks/useGetData';
 import { Episode } from '../types/episode';
@@ -15,8 +21,10 @@ export default function EpisodesList() {
   const [name, setName] = useState<string>('');
   const [episodeCode, setEpisodeCode] = useState<string>('');
 
-  const { loading, error, data, hasNextPage } =
-    useGetData<Episode>(endpoints.episodes, currentPage);
+  const { loading, error, data, hasNextPage } = useGetData<Episode>(
+    endpoints.episodes,
+    currentPage
+  );
 
   if (loading) {
     return (
@@ -30,8 +38,7 @@ export default function EpisodesList() {
     return <UnknownError />;
   }
 
-  const loadMoreData = () =>
-    hasNextPage && setCurrentPage(currentPage + 1);
+  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
   return (
     <View>
@@ -57,5 +64,5 @@ export default function EpisodesList() {
         onEndReached={loadMoreData}
       />
     </View>
-  )
+  );
 }

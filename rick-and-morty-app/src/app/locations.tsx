@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { View, ActivityIndicator, FlatList, Pressable, Text } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  Text,
+} from 'react-native';
 import { useGetData } from '../hooks/useGetData';
 import { endpoints } from '../utils/endpoints';
 import { Location } from '../types/location';
@@ -9,7 +15,6 @@ import { LocationsListItem } from '../components/LocationsPage/LocationsListItem
 import { listStyles } from '../styles/listStyles';
 import { FilterLocationsModal } from '../components/LocationsPage/FilterLocationsModal';
 
-
 export default function LocationsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -17,8 +22,10 @@ export default function LocationsList() {
   const [type, setType] = useState<string>('');
   const [dimension, setDimension] = useState<string>('');
 
-  const { loading, error, data, hasNextPage } =
-    useGetData<Location>(endpoints.locations, currentPage);
+  const { loading, error, data, hasNextPage } = useGetData<Location>(
+    endpoints.locations,
+    currentPage
+  );
 
   if (loading) {
     return (
@@ -32,8 +39,7 @@ export default function LocationsList() {
     return <UnknownError />;
   }
 
-  const loadMoreData = () =>
-    hasNextPage && setCurrentPage(currentPage + 1);
+  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
   return (
     <View>
@@ -61,4 +67,4 @@ export default function LocationsList() {
       />
     </View>
   );
-};
+}

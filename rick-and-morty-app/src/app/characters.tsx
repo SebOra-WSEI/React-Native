@@ -10,7 +10,11 @@ import { CharactersListItem } from '../components/CharactersPage/CharactersListI
 import { ListLoader } from '../components/ListLoader/ListLoader';
 import { UnknownError } from '../components/Error/UnknownError';
 import { useGetData } from '../hooks/useGetData';
-import { Character, CharacterGender, CharacterStatus } from '../types/character';
+import {
+  Character,
+  CharacterGender,
+  CharacterStatus,
+} from '../types/character';
 import { FilterCharactersModal } from '../components/CharactersPage/FilterCharactersModal';
 import { endpoints } from '../utils/endpoints';
 import { listStyles } from '../styles/listStyles';
@@ -24,8 +28,10 @@ export default function CharactersList() {
   const [type, setType] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const { loading, error, data, hasNextPage } =
-    useGetData<Character>(endpoints.characters, currentPage);
+  const { loading, error, data, hasNextPage } = useGetData<Character>(
+    endpoints.characters,
+    currentPage
+  );
 
   if (loading) {
     return (
@@ -39,8 +45,7 @@ export default function CharactersList() {
     return <UnknownError />;
   }
 
-  const loadMoreData = () =>
-    hasNextPage && setCurrentPage(currentPage + 1);
+  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
 
   return (
     <View>
@@ -70,5 +75,4 @@ export default function CharactersList() {
       />
     </View>
   );
-};
-
+}
