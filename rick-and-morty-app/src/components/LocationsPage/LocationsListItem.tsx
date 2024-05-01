@@ -1,4 +1,4 @@
-import { listItemStyles } from "@/src/styles/listItem";
+import { listStyles } from "@/src/styles/listStyles";
 import { Location } from "@/src/types/location";
 import React from "react";
 import { View, Text } from "react-native";
@@ -13,11 +13,11 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
   const { name, type, dimension } = location;
 
   return (
-    <View style={listItemStyles.view}>
+    <View style={listStyles.view}>
       <View>
-        <Text style={listItemStyles.name}>{name}</Text>
-        <Text style={listItemStyles.secondText}>Type: {type}</Text>
-        <Text style={listItemStyles.secondText}>Dimension: {dimension}</Text>
+        <Text style={listStyles.name}>{name}</Text>
+        <Text style={listStyles.secondText}>Type: {type}</Text>
+        <Text style={listStyles.secondText}>Dimension: {dimension}</Text>
       </View>
     </View>
   )

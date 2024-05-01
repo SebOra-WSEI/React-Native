@@ -2,10 +2,8 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-  StyleSheet,
   Pressable,
   Text,
-  Button,
 } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
@@ -15,6 +13,7 @@ import { useGetData } from '../hooks/useGetData';
 import { Character, CharacterGender, CharacterStatus } from '../types/character';
 import { FilterCharactersModal } from '../components/CharactersPage/FilterCharactersModal';
 import { endpoints } from '../utils/endpoints';
+import { listStyles } from '../styles/listStyles';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -30,7 +29,7 @@ export default function CharactersList() {
 
   if (loading) {
     return (
-      <View style={styles.loader}>
+      <View style={listStyles.loader}>
         <ActivityIndicator size='large' />
       </View>
     );
@@ -57,9 +56,9 @@ export default function CharactersList() {
         type={type}
         setType={setType}
       />
-      <View style={styles.filterView}>
+      <View style={listStyles.filterView}>
         <Pressable onPress={() => setIsModalVisible(true)}>
-          <Text style={styles.filterText}>Filter</Text>
+          <Text style={listStyles.filterText}>Filter</Text>
         </Pressable>
       </View>
       <FlatList
@@ -71,19 +70,5 @@ export default function CharactersList() {
       />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  filterView: {
-    alignItems: 'flex-end',
-    marginHorizontal: 20,
-    marginVertical: 15,
-  },
-  filterText: {
-    color: '#2196F3',
-  },
-  loader: {
-    justifyContent: 'center',
-    flex: 1,
-  },
-});

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const listItemStyles = StyleSheet.create({
+export const listStyles = StyleSheet.create({
   view: {
     flexDirection: 'row',
     paddingHorizontal: 16,
@@ -14,5 +14,17 @@ export const listItemStyles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: '500',
+  },
+  filterView: {
+    alignItems: 'flex-end',
+    marginHorizontal: 20,
+    marginVertical: 15,
+  },
+  filterText: {
+    color: '#2196F3',
+  },
+  loader: {
+    justifyContent: 'center',
+    flex: 1,
   },
 });

@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 import React from 'react';
 import { Character } from '@/src/types/character';
-import { listItemStyles } from '@/src/styles/listItem';
+import { listStyles } from '@/src/styles/listStyles';
 
 interface FlatListItemProps {
   character: Character;
@@ -13,13 +13,13 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
   const { image, name, species, status, gender } = character;
 
   return (
-    <View style={listItemStyles.view}>
+    <View style={listStyles.view}>
       <Image style={styles.img} source={{ uri: image }} />
       <View>
-        <Text style={listItemStyles.name}>{name}</Text>
-        <Text style={listItemStyles.secondText}>Species: {species}</Text>
-        <Text style={listItemStyles.secondText}>Status: {status}</Text>
-        <Text style={listItemStyles.secondText}>Gender: {gender}</Text>
+        <Text style={listStyles.name}>{name}</Text>
+        <Text style={listStyles.secondText}>Species: {species}</Text>
+        <Text style={listStyles.secondText}>Status: {status}</Text>
+        <Text style={listStyles.secondText}>Gender: {gender}</Text>
       </View>
     </View>
   );
