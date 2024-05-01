@@ -36,23 +36,23 @@ export function useGetData<T>({
     type: characterType,
   } = characterFilters ?? {};
 
-  const characterNameQueryFilter = characterName
-    ? `&name=${characterName}`
-    : '';
-  const speciesQueryFilter = species ? `&species=${species}` : '';
-  const statusQueryFilter = status ? `&status=${status}` : '';
-  const genderQueryFilter = gender ? `&gender=${gender}` : '';
-  const characterTypeQueryFilter = characterType
-    ? `&type=${characterType}`
-    : '';
-
   const {
     name: locationName,
     type: locationType,
     dimension,
   } = locationFilters ?? {};
 
-  const locationNameQueryFilter = locationName ? `&name=${locationName}` : '';
+  const nameQueryFilter =
+    characterName || locationName
+      ? `&name=${characterName || locationName}`
+      : '';
+  const speciesQueryFilter = species ? `&species=${species}` : '';
+  const statusQueryFilter = status ? `&status=${status}` : '';
+  const genderQueryFilter = gender ? `&gender=${gender}` : '';
+  const typeQueryFilter =
+    characterType || locationType
+      ? `&type=${characterType || locationType}`
+      : '';
   const locationTypeQueryFilter = locationType ? `&type=${locationType}` : '';
   const dimensionNameQueryFilter = dimension ? `&dimension=${dimension}` : '';
 
@@ -60,12 +60,11 @@ export function useGetData<T>({
     await fetch(
       `${endpoint}?page=
       ${page}
-      ${characterNameQueryFilter}
+      ${nameQueryFilter}
       ${statusQueryFilter}
       ${genderQueryFilter}
-      ${characterTypeQueryFilter}
+      ${typeQueryFilter}
       ${speciesQueryFilter}
-      ${locationNameQueryFilter}
       ${locationTypeQueryFilter}
       ${dimensionNameQueryFilter}`
     )
