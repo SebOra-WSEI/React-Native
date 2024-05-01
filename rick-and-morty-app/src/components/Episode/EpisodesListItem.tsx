@@ -1,3 +1,4 @@
+import { routerBuilder } from '@/src/routes/routes';
 import { listStyles } from '@/src/styles/listStyles';
 import { Episode } from '@/src/types/episode';
 import { FontAwesome } from '@expo/vector-icons';
@@ -33,7 +34,7 @@ export const EpisodesListItem: React.FC<EpisodesListItemProps> = ({
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
-          onPress={() => router.navigate(`episodes/${id}`)}
+          onPress={() => router.navigate(routerBuilder.episode(String(id)))}
         >
           <Text style={styles.buttonText}>Get details</Text>
         </Pressable>

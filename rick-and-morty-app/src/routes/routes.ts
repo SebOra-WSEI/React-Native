@@ -8,6 +8,9 @@ export const endpoints = {
 
 export const routerBuilder = {
   characters: '/characters/characters',
+  character: (id: string) => `/characters/${id}`,
   locations: '/locations/locations',
+  location: (id: string) => `/locations/${id}`,
   episodes: '/episodes/episodes',
+  episode: (id: string) => `/episodes/${id}`,
 } as const;

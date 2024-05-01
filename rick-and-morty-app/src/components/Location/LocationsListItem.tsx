@@ -1,3 +1,4 @@
+import { routerBuilder } from '@/src/routes/routes';
 import { listStyles } from '@/src/styles/listStyles';
 import { Location } from '@/src/types/location';
 import { FontAwesome } from '@expo/vector-icons';
@@ -33,7 +34,7 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
-          onPress={() => router.navigate(`locations/${id}`)}
+          onPress={() => router.navigate(routerBuilder.location(String(id)))}
         >
           <Text style={styles.buttonText}>Get details</Text>
         </Pressable>

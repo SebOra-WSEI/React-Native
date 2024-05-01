@@ -3,6 +3,7 @@ import React from 'react';
 import { Character } from '@/src/types/character';
 import { listStyles } from '@/src/styles/listStyles';
 import { useRouter } from 'expo-router';
+import { routerBuilder } from '@/src/routes/routes';
 
 interface FlatListItemProps {
   character?: Character;
@@ -27,7 +28,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
-          onPress={() => router.navigate(`characters/${id}`)}
+          onPress={() => router.navigate(routerBuilder.character(String(id)))}
         >
           <Text style={styles.buttonText}>Get details</Text>
         </Pressable>

@@ -1,12 +1,19 @@
 import { UnknownError } from "@/src/components/Error/UnknownError";
 import { useGetDataById } from "@/src/hooks/useGetDataById";
-import { endpoints } from "@/src/routes/routes";
+import { useGetPrevScreen } from "@/src/hooks/useGetPrevScreen";
+import { endpoints, routerBuilder } from "@/src/routes/routes";
 import { listStyles } from "@/src/styles/listStyles";
 import { Character } from "@/src/types/character";
+import { useRouter } from "expo-router";
 import React from "react";
-import { Text, ActivityIndicator, View, Image, StyleSheet } from "react-native";
+import { Text, ActivityIndicator, View, Image, StyleSheet, Pressable } from "react-native";
+import { DataTable } from "react-native-paper";
 
 export const Resident: React.FC<{ id: string }> = ({ id }) => {
+  const router = useRouter();
+
+  const { isPrevScreenTheSame } = useGetPrevScreen('characters');
+
   const { loading, error, data } =
     useGetDataById<Character>(endpoints.characters, id);
 
@@ -23,19 +30,32 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
   }
 
   return (
-    <View style={styles.view}>
-      <Image style={styles.img} source={{ uri: data?.image }} />
-      <View style={{
-        marginLeft: 10
-      }}>
-        <Text style={styles.text}>
-          {data?.name}
-        </Text>
-        <Text style={listStyles.secondText}>Species: {data?.species}</Text>
-        <Text style={listStyles.secondText}>Status: {data?.status}</Text>
-        <Text style={listStyles.secondText}>Gender: {data?.gender}</Text>
-      </View>
-    </View>
+    <>
+      <DataTable.Cell>
+        <View style={styles.view}>
+          <Image style={styles.img} source={{ uri: data?.image }} />
+          <View style={{
+            marginLeft: 10
+          }}>
+            <Text style={styles.text}>
+              {data?.name}
+            </Text>
+            <Text style={listStyles.secondText}>Species: {data?.species}</Text>
+            <Text style={listStyles.secondText}>Status: {data?.status}</Text>
+            <Text style={listStyles.secondText}>Gender: {data?.gender}</Text>
+          </View>
+        </View >
+      </DataTable.Cell>
+      {!isPrevScreenTheSame && (
+        <DataTable.Cell>
+          <View style={styles.detailsButton}>
+            <Pressable onPress={() => router.navigate(routerBuilder.character(String(data?.id)))}>
+              <Text style={listStyles.filterText}>Details</Text>
+            </Pressable>
+          </View>
+        </DataTable.Cell>
+      )}
+    </>
   );
 };
 
@@ -53,5 +73,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     fontWeight: 'bold',
+  },
+  detailsButton: {
+    marginLeft: 'auto'
   }
 });
