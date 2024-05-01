@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { QueryResponse } from '../types/response';
 import { DefaultCharacterFilters } from '../types/character';
 import { DefaultLocationFilters } from '../types/location';
+import { DefaultEpisodeFilters } from '../types/episode';
 
 interface UseGetDataResult<T> {
   loading: boolean;
@@ -15,6 +16,7 @@ interface useGetDataArgs {
   currentPage: number;
   characterFilters?: DefaultCharacterFilters;
   locationFilters?: DefaultLocationFilters;
+  episodeFilters?: DefaultEpisodeFilters;
 }
 
 export function useGetData<T>({
@@ -22,6 +24,7 @@ export function useGetData<T>({
   currentPage,
   characterFilters,
   locationFilters,
+  episodeFilters,
 }: useGetDataArgs): UseGetDataResult<Array<T>> {
   const [data, setData] = useState<Array<T>>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,9 +45,11 @@ export function useGetData<T>({
     dimension,
   } = locationFilters ?? {};
 
+  const { name: episodeName, episodeCode } = episodeFilters ?? {};
+
   const nameQueryFilter =
-    characterName || locationName
-      ? `&name=${characterName || locationName}`
+    characterName || locationName || episodeName
+      ? `&name=${characterName || locationName || episodeName}`
       : '';
   const speciesQueryFilter = species ? `&species=${species}` : '';
   const statusQueryFilter = status ? `&status=${status}` : '';
@@ -53,8 +58,8 @@ export function useGetData<T>({
     characterType || locationType
       ? `&type=${characterType || locationType}`
       : '';
-  const locationTypeQueryFilter = locationType ? `&type=${locationType}` : '';
-  const dimensionNameQueryFilter = dimension ? `&dimension=${dimension}` : '';
+  const dimensionQueryFilter = dimension ? `&dimension=${dimension}` : '';
+  const episodeQueryFilter = episodeCode ? `&episode=${episodeCode}` : '';
 
   const fetchData = async (page: number) => {
     await fetch(
@@ -65,8 +70,8 @@ export function useGetData<T>({
       ${genderQueryFilter}
       ${typeQueryFilter}
       ${speciesQueryFilter}
-      ${locationTypeQueryFilter}
-      ${dimensionNameQueryFilter}`
+      ${dimensionQueryFilter}
+      ${episodeQueryFilter}`
     )
       .then((res) => res.json())
       .then((res: QueryResponse<T>) => {
@@ -98,6 +103,8 @@ export function useGetData<T>({
     locationName,
     locationType,
     dimension,
+    episodeName,
+    episodeCode,
   ]);
 
   return {

@@ -23,7 +23,8 @@ export default function EpisodesList() {
 
   const { loading, error, data, hasNextPage } = useGetData<Episode>({
     endpoint: endpoints.episodes,
-    currentPage
+    currentPage,
+    episodeFilters: { name, episodeCode }
   });
 
   if (loading) {
@@ -49,6 +50,7 @@ export default function EpisodesList() {
         setName={setName}
         episode={episodeCode}
         setEpisodeCode={setEpisodeCode}
+        setCurrentPage={setCurrentPage}
       />
 
       <View style={listStyles.filterView}>
