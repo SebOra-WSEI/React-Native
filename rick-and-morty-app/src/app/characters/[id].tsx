@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { View, StyleSheet, Image, Text, ActivityIndicator, StatusBar, ScrollView } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import { Character } from "../../types/character";
 import { endpoints } from "../../routes/routes";
 import { listStyles } from "../../styles/listStyles";
@@ -10,6 +10,8 @@ import { DataTable } from "react-native-paper";
 import { EpisodeName } from "./EpisodeName";
 import { TableTitle } from "@/src/components/Table/TableTitle";
 import { TableCell } from "@/src/components/Table/TableCell";
+import { detailsPageStyles } from "@/src/styles/details";
+import { CommonDetailsPage } from "@/src/components/Details/CommonDetailsPage";
 
 export default function CharacterDetails() {
   const { id } = useLocalSearchParams();
@@ -42,65 +44,44 @@ export default function CharacterDetails() {
   } = data ?? {};
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Image style={styles.img} source={{ uri: image }} />
-        <Text style={styles.name}>{name}</Text>
-        <DataTable>
-          <DataTable.Header>
-            <TableTitle title='Status' />
-            <TableTitle title='Species' />
-            <TableTitle title='Type' />
-          </DataTable.Header>
-          <DataTable.Row>
-            <TableCell value={status} />
-            <TableCell value={species} />
-            <TableCell value={type} />
+    <CommonDetailsPage imageUrl={image ?? ''}>
+      <Text style={detailsPageStyles.name}>{name}</Text>
+      <DataTable>
+        <DataTable.Header>
+          <TableTitle title='Status' />
+          <TableTitle title='Species' />
+          <TableTitle title='Type' />
+        </DataTable.Header>
+        <DataTable.Row>
+          <TableCell value={status} />
+          <TableCell value={species} />
+          <TableCell value={type} />
+        </DataTable.Row>
+      </DataTable>
+      <DataTable style={{ marginTop: 20 }}>
+        <DataTable.Header>
+          <TableTitle title='Gender' />
+          <TableTitle title='Origin' />
+          <TableTitle title='Location' />
+        </DataTable.Header>
+        <DataTable.Row>
+          <TableCell value={gender} />
+          <TableCell value={origin?.name} />
+          <TableCell value={location?.name} />
+        </DataTable.Row>
+      </DataTable>
+      <DataTable>
+        <DataTable.Header>
+          <TableTitle title='' />
+          <TableTitle title='Episodes' />
+          <TableTitle title='' />
+        </DataTable.Header>
+        {episode?.map((e) => (
+          <DataTable.Row key={e}>
+            <EpisodeName id={e.slice(e.lastIndexOf('/') + 1)} />
           </DataTable.Row>
-        </DataTable>
-        <DataTable style={{ marginTop: 20 }}>
-          <DataTable.Header>
-            <TableTitle title='Gender' />
-            <TableTitle title='Origin' />
-            <TableTitle title='Location' />
-          </DataTable.Header>
-          <DataTable.Row>
-            <TableCell value={gender} />
-            <TableCell value={origin?.name} />
-            <TableCell value={location?.name} />
-          </DataTable.Row>
-        </DataTable>
-        <DataTable>
-          <DataTable.Header>
-            <TableTitle title='' />
-            <TableTitle title='Episodes' />
-            <TableTitle title='' />
-          </DataTable.Header>
-          {episode?.map((e) => (
-            <DataTable.Row key={e}>
-              <EpisodeName id={e.slice(e.lastIndexOf('/') + 1)} />
-            </DataTable.Row>
-          ))}
-        </DataTable>
-      </View>
-    </ScrollView>
+        ))}
+      </DataTable>
+    </CommonDetailsPage>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: StatusBar.currentHeight || 40,
-  },
-  img: {
-    height: 200,
-    width: 200,
-    borderRadius: 100,
-  },
-  name: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 10,
-  }
-});
