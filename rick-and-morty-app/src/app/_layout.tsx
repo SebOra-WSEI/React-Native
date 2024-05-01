@@ -63,27 +63,33 @@ function RootLayoutNav() {
         />
         <Stack.Screen name='modal' options={{ presentation: 'modal' }} />
         <Stack.Screen
-          name='characters'
+          name='characters/characters'
           options={{
             title: 'Characters',
           }}
         />
         <Stack.Screen
-          name='episodes'
+          name='episodes/episodes'
           options={{
             title: 'Episodes',
           }}
         />
         <Stack.Screen
-          name='locations'
+          name='locations/locations'
           options={{
             title: 'Locations',
           }}
         />
         <Stack.Screen
-          name='[id]'
+          name='characters/[id]'
           options={{
             title: 'Character Details',
+          }}
+        />
+        <Stack.Screen
+          name='locations/[id]'
+          options={{
+            title: 'Location Details',
           }}
         />
       </Stack>

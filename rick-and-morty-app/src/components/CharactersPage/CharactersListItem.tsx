@@ -27,7 +27,7 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
-          onPress={() => router.navigate(`/${id}`)}
+          onPress={() => router.navigate(`characters/${id}`)}
         >
           <Text style={styles.buttonText}>Get details</Text>
         </Pressable>

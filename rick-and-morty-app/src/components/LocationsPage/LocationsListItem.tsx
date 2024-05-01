@@ -14,7 +14,7 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
 }) => {
   const router = useRouter();
 
-  const { name, type, dimension } = location;
+  const { id, name, type, dimension } = location;
 
   return (
     <View style={listStyles.view}>
@@ -33,7 +33,7 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
-        // onPress={() => router.navigate(`/${id}`)}
+          onPress={() => router.navigate(`locations/${id}`)}
         >
           <Text style={styles.buttonText}>Get details</Text>
         </Pressable>

@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   View,
-  ActivityIndicator,
-  FlatList,
-  Pressable,
   Text,
+  ActivityIndicator,
+  Pressable,
+  FlatList,
 } from 'react-native';
-import { useGetData } from '../hooks/useGetData';
-import { endpoints } from '../utils/endpoints';
-import { Location } from '../types/location';
-import { UnknownError } from '../components/Error/UnknownError';
-import { ListLoader } from '../components/ListLoader/ListLoader';
-import { LocationsListItem } from '../components/LocationsPage/LocationsListItem';
-import { listStyles } from '../styles/listStyles';
-import { FilterLocationsModal } from '../components/LocationsPage/FilterLocationsModal';
+import { endpoints } from '../../utils/endpoints';
+import { useGetData } from '../../hooks/useGetData';
+import { Episode } from '../../types/episode';
+import { listStyles } from '../../styles/listStyles';
+import { UnknownError } from '../../components/Error/UnknownError';
+import { ListLoader } from '../../components/ListLoader/ListLoader';
+import { EpisodesListItem } from '../../components/EpisodesPage/EpisodesListItem';
+import { FilterEpisodesModal } from '../../components/EpisodesPage/FilterEpisodesModal';
 
-export default function LocationsList() {
+export default function EpisodesList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
-  const [type, setType] = useState<string>('');
-  const [dimension, setDimension] = useState<string>('');
+  const [episodeCode, setEpisodeCode] = useState<string>('');
 
-  const { loading, error, data, hasNextPage } = useGetData<Location>(
-    endpoints.locations,
+  const { loading, error, data, hasNextPage } = useGetData<Episode>(
+    endpoints.episodes,
     currentPage
   );
 
@@ -43,16 +42,15 @@ export default function LocationsList() {
 
   return (
     <View>
-      <FilterLocationsModal
+      <FilterEpisodesModal
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         name={name}
         setName={setName}
-        type={type}
-        setType={setType}
-        dimension={dimension}
-        setDimension={setDimension}
+        episode={episodeCode}
+        setEpisodeCode={setEpisodeCode}
       />
+
       <View style={listStyles.filterView}>
         <Pressable onPress={() => setIsModalVisible(true)}>
           <Text style={listStyles.filterText}>Filter</Text>
@@ -60,7 +58,7 @@ export default function LocationsList() {
       </View>
       <FlatList
         data={data}
-        renderItem={({ item }) => <LocationsListItem location={item} />}
+        renderItem={({ item }) => <EpisodesListItem episode={item} />}
         keyExtractor={(item, index) => String(item.id) + index}
         ListFooterComponent={hasNextPage ? <ListLoader /> : null}
         onEndReached={loadMoreData}

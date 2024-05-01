@@ -1,11 +1,11 @@
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View, StyleSheet, Image, Text, ActivityIndicator, StatusBar, ScrollView } from "react-native";
-import { Character } from "../types/character";
-import { endpoints } from "../utils/endpoints";
-import { listStyles } from "../styles/listStyles";
-import { UnknownError } from "../components/Error/UnknownError";
-import { useGetDataById } from "../hooks/useGetDataById";
+import { Character } from "../../types/character";
+import { endpoints } from "../../utils/endpoints";
+import { listStyles } from "../../styles/listStyles";
+import { UnknownError } from "../../components/Error/UnknownError";
+import { useGetDataById } from "../../hooks/useGetDataById";
 import { DataTable } from "react-native-paper";
 
 export default function CharacterDetails() {
@@ -74,7 +74,7 @@ export default function CharacterDetails() {
             <TableTitle title='' />
           </DataTable.Header>
           {episode?.map((e) => (
-            <DataTable.Row>
+            <DataTable.Row key={e}>
               <TableCell value={e} />
             </DataTable.Row>
           ))}

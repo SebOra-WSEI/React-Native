@@ -12,7 +12,7 @@ export const ViewsList: React.FC<ViewsListProps> = ({ view }) => {
 
   return (
     <Pressable style={styles.item}>
-      <Link href={`/${view}`}>
+      <Link href={`/${view}/${view}`}>
         <Text style={styles.itemTitle}>{displayedTitle}</Text>
       </Link>
     </Pressable>
