@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../components/CharactersPage/CharactersListItem';
-import { Loader } from '../components/Loader/Loader';
+import { ListLoader } from '../components/ListLoader/ListLoader';
 import { UnknownError } from '../components/Error/UnknownError';
 import { useGetData } from '../hooks/useGetData';
-import { CharacterGender, CharacterStatus } from '../types/character';
+import { Character, CharacterGender, CharacterStatus } from '../types/character';
 import { FilterCharactersModal } from '../components/CharactersPage/FilterCharactersModal';
 import { endpoints } from '../utils/endpoints';
 
@@ -26,13 +26,11 @@ export default function CharactersList() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const { loading, error, data, hasNextPage } =
-    useGetData(endpoints.characters, currentPage);
-
-  const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
+    useGetData<Character>(endpoints.characters, currentPage);
 
   if (loading) {
     return (
-      <View style={styles.view}>
+      <View style={styles.loader}>
         <ActivityIndicator size='large' />
       </View>
     );
@@ -41,6 +39,9 @@ export default function CharactersList() {
   if (error) {
     return <UnknownError />;
   }
+
+  const loadMoreData = () =>
+    hasNextPage && setCurrentPage(currentPage + 1);
 
   return (
     <View>
@@ -65,7 +66,7 @@ export default function CharactersList() {
         data={data}
         renderItem={({ item }) => <CharactersListItem character={item} />}
         keyExtractor={(item, index) => String(item.id) + index}
-        ListFooterComponent={hasNextPage ? <Loader /> : null}
+        ListFooterComponent={hasNextPage ? <ListLoader /> : null}
         onEndReached={loadMoreData}
       />
     </View>
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
   filterText: {
     color: '#2196F3',
   },
-  view: {
+  loader: {
     justifyContent: 'center',
     flex: 1,
   },

@@ -12,7 +12,7 @@ export function useGetData<T>(
   endpoint: string,
   currentPage: number
 ): UseGetDataResult<Array<T>> {
-  const [characters, setCharacters] = useState<Array<T>>([]);
+  const [data, setData] = useState<Array<T>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
@@ -22,7 +22,7 @@ export function useGetData<T>(
       .then((res) => res.json())
       .then((res: QueryResponse<T>) => {
         setHasNextPage(!!res.info.next);
-        setCharacters([...characters, ...res.results]);
+        setData([...data, ...res.results]);
         setLoading(false);
       })
       .catch((err) => {
@@ -38,7 +38,7 @@ export function useGetData<T>(
   return {
     loading,
     error,
-    data: characters,
+    data,
     hasNextPage,
   };
 }
