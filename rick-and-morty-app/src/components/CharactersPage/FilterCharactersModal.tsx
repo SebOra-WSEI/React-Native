@@ -34,58 +34,56 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
   setSpecies,
   type,
   setType,
-}) => {
-  return (
-    <Modal animationType='slide' transparent visible={isModalVisible}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <RNPickerSelect
-            style={pickerSelectStyles}
-            onValueChange={(value) => setStatus(value)}
-            items={Object.entries(CharacterStatus).map(([label, value]) => ({
-              label,
-              value,
-            }))}
-            placeholder={{ label: 'Filter by status ...' }}
-          />
-          <RNPickerSelect
-            style={pickerSelectStyles}
-            onValueChange={(value) => setGender(value)}
-            items={Object.entries(CharacterGender).map(([label, value]) => ({
-              label,
-              value,
-            }))}
-            placeholder={{ label: 'Filter by gender ...' }}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder='Filter by name ...'
-            onChangeText={(value) => setName(value)}
-            defaultValue={name}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder='Filter by species ...'
-            onChangeText={(value) => setSpecies(value)}
-            defaultValue={species}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder='Filter by type ...'
-            onChangeText={(value) => setType(value)}
-            defaultValue={type}
-          />
-          <Pressable
-            style={styles.button}
-            onPress={() => setIsModalVisible(false)}
-          >
-            <Text style={styles.textStyle}>Hide Modal</Text>
-          </Pressable>
-        </View>
+}) => (
+  <Modal animationType='slide' transparent visible={isModalVisible}>
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        <RNPickerSelect
+          style={pickerSelectStyles}
+          onValueChange={(value) => setStatus(value)}
+          items={Object.entries(CharacterStatus).map(([label, value]) => ({
+            label,
+            value,
+          }))}
+          placeholder={{ label: 'Filter by status ...' }}
+        />
+        <RNPickerSelect
+          style={pickerSelectStyles}
+          onValueChange={(value) => setGender(value)}
+          items={Object.entries(CharacterGender).map(([label, value]) => ({
+            label,
+            value,
+          }))}
+          placeholder={{ label: 'Filter by gender ...' }}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Filter by name ...'
+          onChangeText={(value) => setName(value)}
+          defaultValue={name}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Filter by species ...'
+          onChangeText={(value) => setSpecies(value)}
+          defaultValue={species}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Filter by type ...'
+          onChangeText={(value) => setType(value)}
+          defaultValue={type}
+        />
+        <Pressable
+          style={styles.button}
+          onPress={() => setIsModalVisible(false)}
+        >
+          <Text style={styles.textStyle}>Filter</Text>
+        </Pressable>
       </View>
-    </Modal>
-  );
-};
+    </View>
+  </Modal>
+);
 
 const styles = StyleSheet.create({
   input: {

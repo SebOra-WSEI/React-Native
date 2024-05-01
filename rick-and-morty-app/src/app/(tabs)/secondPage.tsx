@@ -1,8 +1,7 @@
-import { FlatListItem } from '@/src/components/SecondPage/FlatListItem';
+import { ViewsList } from '@/src/components/SecondPage/ViewsList';
 import { textColor } from '@/src/constants/Colors';
 import { ATTRIBUTES } from '@/src/constants/attributes';
 import { backgroundUri } from '@/src/constants/backgroudURI';
-import { ViewType } from '@/src/types/view';
 import {
   StyleSheet,
   View,
@@ -20,7 +19,7 @@ export default function SecondPage() {
         <FlatList
           style={styles.flatList}
           data={ATTRIBUTES}
-          renderItem={({ item }) => <FlatListItem view={item as ViewType} />}
+          renderItem={({ item }) => <ViewsList view={item} />}
           keyExtractor={(item) => item}
         />
       </View>

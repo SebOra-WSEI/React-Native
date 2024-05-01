@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Character } from '../types/character';
 import { CharacterResponse, QueryResponse } from '../types/response';
-import { ApiURL } from '../constants/api';
+import { endpoints } from '../utils/endpoints';
 
 export const useGetCharacters = (
   currentPage: number
@@ -12,7 +12,7 @@ export const useGetCharacters = (
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
 
   const fetchData = async (page: number) => {
-    await fetch(`${ApiURL}?page=${page}`)
+    await fetch(`${endpoints.characters}?page=${page}`)
       .then((res) => res.json())
       .then((res: CharacterResponse) => {
         setHasNextPage(!!res.info.next);
