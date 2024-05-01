@@ -10,7 +10,7 @@ import { endpoints } from '../../routes/routes';
 import { useGetData } from '../../hooks/useGetData';
 import { Episode } from '../../types/episode';
 import { listStyles } from '../../styles/listStyles';
-import { UnknownError } from '../../components/Error/UnknownError';
+import { Error } from '../../components/Error/Error';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
 import { FilterEpisodesModal } from '../../components/Episode/FilterEpisodesModal';
 import { EpisodesListItem } from '@/src/components/Episode/EpisodesListItem';
@@ -36,7 +36,7 @@ export default function EpisodesList() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);

@@ -6,7 +6,7 @@ import { DefaultEpisodeFilters } from '../types/episode';
 
 interface UseGetDataResult<T> {
   loading: boolean;
-  error: boolean;
+  error: string;
   data: T;
   hasNextPage: boolean;
 }
@@ -28,7 +28,7 @@ export function useGetData<T>({
 }: useGetDataArgs): UseGetDataResult<Array<T>> {
   const [data, setData] = useState<Array<T>>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
 
   const {
@@ -83,6 +83,8 @@ export function useGetData<T>({
 
           return [...data, ...res.results];
         });
+
+        res?.error && setError(res.error);
         setLoading(false);
       })
       .catch((err) => {

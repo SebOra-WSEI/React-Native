@@ -9,7 +9,7 @@ import {
 import { useGetData } from '../../hooks/useGetData';
 import { endpoints } from '../../routes/routes';
 import { Location } from '../../types/location';
-import { UnknownError } from '../../components/Error/UnknownError';
+import { Error } from '../../components/Error/Error';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
 import { LocationsListItem } from '../../components/Location/LocationsListItem';
 import { listStyles } from '../../styles/listStyles';
@@ -37,7 +37,7 @@ export default function LocationsList() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);

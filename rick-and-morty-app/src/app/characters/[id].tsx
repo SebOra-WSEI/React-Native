@@ -4,7 +4,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import { Character } from '../../types/character';
 import { endpoints } from '../../routes/routes';
 import { listStyles } from '../../styles/listStyles';
-import { UnknownError } from '../../components/Error/UnknownError';
+import { Error } from '../../components/Error/Error';
 import { useGetDataById } from '../../hooks/useGetDataById';
 import { DataTable } from 'react-native-paper';
 import { EpisodeName } from './EpisodeName';
@@ -30,7 +30,7 @@ export default function CharacterDetails() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const {

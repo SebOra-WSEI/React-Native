@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { endpoints } from '../../routes/routes';
 import { listStyles } from '../../styles/listStyles';
-import { UnknownError } from '../../components/Error/UnknownError';
+import { Error } from '../../components/Error/Error';
 import { useGetDataById } from '../../hooks/useGetDataById';
 import { Episode } from '@/src/types/episode';
 import { DataTable } from 'react-native-paper';
@@ -30,7 +30,7 @@ export default function LocationDetails() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const { name, air_date, episode, characters } = data ?? {};

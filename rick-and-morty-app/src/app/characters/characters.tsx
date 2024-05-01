@@ -8,7 +8,7 @@ import {
 import React, { useState } from 'react';
 import { CharactersListItem } from '../../components/Character/CharactersListItem';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
-import { UnknownError } from '../../components/Error/UnknownError';
+import { Error } from '../../components/Error/Error';
 import { useGetData } from '../../hooks/useGetData';
 import {
   Character,
@@ -43,7 +43,7 @@ export default function CharactersList() {
   }
 
   if (error) {
-    return <UnknownError />;
+    return <Error errorMsg={error} />;
   }
 
   const loadMoreData = () => hasNextPage && setCurrentPage(currentPage + 1);
