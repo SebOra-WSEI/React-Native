@@ -1,4 +1,4 @@
-import { TextInput, StyleSheet, Pressable, Text } from 'react-native';
+import { TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { FilterModal } from '../FilterModal/FilterModal';
 import { modalStyles } from '@/src/styles/modal';
@@ -43,7 +43,7 @@ export const FilterLocationsModal: React.FC<FilterLocationsModalProps> = ({
   };
 
   return (
-    <FilterModal isModalVisible={isModalVisible}>
+    <FilterModal isModalVisible={isModalVisible} handleOnPress={handleOnPress}>
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by name ...'
@@ -53,7 +53,7 @@ export const FilterLocationsModal: React.FC<FilterLocationsModalProps> = ({
             name: value,
           })
         }
-        defaultValue={name}
+        defaultValue={filters.name}
       />
       <TextInput
         style={modalStyles.input}
@@ -64,7 +64,7 @@ export const FilterLocationsModal: React.FC<FilterLocationsModalProps> = ({
             type: value,
           })
         }
-        defaultValue={type}
+        defaultValue={filters.type}
       />
       <TextInput
         style={modalStyles.input}
@@ -75,26 +75,8 @@ export const FilterLocationsModal: React.FC<FilterLocationsModalProps> = ({
             dimension: value,
           })
         }
-        defaultValue={dimension}
+        defaultValue={filters.dimension}
       />
-      <Pressable style={styles.button} onPress={handleOnPress}>
-        <Text style={styles.textStyle}>Filter</Text>
-      </Pressable>
     </FilterModal>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    marginTop: 20,
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});

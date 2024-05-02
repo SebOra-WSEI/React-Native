@@ -1,19 +1,14 @@
 import { Error } from '@/src/components/Error/Error';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { endpoints, routerBuilder } from '@/src/routes/routes';
-import { listStyles } from '@/src/styles/listStyles';
 import React from 'react';
-import {
-  ActivityIndicator,
-  View,
-  Pressable,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import { View, Pressable, Text, StyleSheet } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { Episode } from '@/src/types/episode';
 import { useRouter } from 'expo-router';
 import { useGetPrevScreen } from '@/src/hooks/useGetPrevScreen';
+import { buttonColor } from '@/src/constants/Colors';
+import { ScreenLoader } from '@/src/components/Loader/ScreenLoader';
 
 export const EpisodeName: React.FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
@@ -26,11 +21,7 @@ export const EpisodeName: React.FC<{ id: string }> = ({ id }) => {
   );
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />;
   }
 
   if (error) {
@@ -48,7 +39,7 @@ export const EpisodeName: React.FC<{ id: string }> = ({ id }) => {
                 router.navigate(routerBuilder.episode(String(data?.id)))
               }
             >
-              <Text style={listStyles.filterText}>Details</Text>
+              <Text style={styles.filterText}>Details</Text>
             </Pressable>
           </View>
         </DataTable.Cell>
@@ -60,5 +51,8 @@ export const EpisodeName: React.FC<{ id: string }> = ({ id }) => {
 export const styles = StyleSheet.create({
   detailsCell: {
     marginLeft: 'auto',
+  },
+  filterText: {
+    color: buttonColor,
   },
 });

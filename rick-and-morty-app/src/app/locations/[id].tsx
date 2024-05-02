@@ -1,5 +1,6 @@
 import { CommonDetailsPage } from '@/src/components/Details/CommonDetailsPage';
 import { Error } from '@/src/components/Error/Error';
+import { ScreenLoader } from '@/src/components/Loader/ScreenLoader';
 import { Resident } from '@/src/components/Location/Resident';
 import { TableCell } from '@/src/components/Table/TableCell';
 import { TableTitle } from '@/src/components/Table/TableTitle';
@@ -7,11 +8,10 @@ import { LOCATION_IMAGE_URL } from '@/src/constants/images';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { endpoints } from '@/src/routes/routes';
 import { detailsPageStyles } from '@/src/styles/details';
-import { listStyles } from '@/src/styles/listStyles';
 import { Location } from '@/src/types/location';
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { Text, ActivityIndicator, View } from 'react-native';
+import { Text } from 'react-native';
 import { DataTable } from 'react-native-paper';
 
 export default function LocationDetails() {
@@ -23,11 +23,7 @@ export default function LocationDetails() {
   );
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />;
   }
 
   if (error) {

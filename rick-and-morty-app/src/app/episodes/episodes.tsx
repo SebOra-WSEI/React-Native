@@ -1,19 +1,14 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  Pressable,
-  FlatList,
-} from 'react-native';
+import { View, Text, Pressable, FlatList } from 'react-native';
 import { endpoints } from '../../routes/routes';
 import { useGetData } from '../../hooks/useGetData';
 import { Episode } from '../../types/episode';
-import { listStyles } from '../../styles/listStyles';
+import { listStyles } from '../../styles/list';
 import { Error } from '../../components/Error/Error';
-import { ListLoader } from '../../components/ListLoader/ListLoader';
+import { ListLoader } from '../../components/Loader/ListLoader';
 import { FilterEpisodesModal } from '../../components/Episode/FilterEpisodesModal';
 import { EpisodesListItem } from '@/src/components/Episode/EpisodesListItem';
+import { ScreenLoader } from '@/src/components/Loader/ScreenLoader';
 
 export default function EpisodesList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -28,11 +23,7 @@ export default function EpisodesList() {
   });
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />;
   }
 
   if (error) {
@@ -48,7 +39,7 @@ export default function EpisodesList() {
         setIsModalVisible={setIsModalVisible}
         name={name}
         setName={setName}
-        episode={episodeCode}
+        episodeCode={episodeCode}
         setEpisodeCode={setEpisodeCode}
         setCurrentPage={setCurrentPage}
       />

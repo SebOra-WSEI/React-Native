@@ -9,7 +9,7 @@ interface FilterEpisodesModalProps {
   setIsModalVisible: (value: boolean) => void;
   name: string;
   setName: (value: string) => void;
-  episode: string;
+  episodeCode: string;
   setEpisodeCode: (value: string) => void;
   setCurrentPage: (value: number) => void;
 }
@@ -19,25 +19,25 @@ export const FilterEpisodesModal: React.FC<FilterEpisodesModalProps> = ({
   setIsModalVisible,
   name,
   setName,
-  episode,
+  episodeCode,
   setEpisodeCode,
   setCurrentPage,
 }) => {
   const [filters, setFilters] = useState<DefaultEpisodeFilters>({
     name,
-    episode,
+    episodeCode,
   });
 
   const handleOnPress = (): void => {
     setName(filters.name);
-    setEpisodeCode(filters.episode);
+    setEpisodeCode(filters.episodeCode);
 
     setCurrentPage(1);
     setIsModalVisible(false);
   };
 
   return (
-    <FilterModal isModalVisible={isModalVisible}>
+    <FilterModal isModalVisible={isModalVisible} handleOnPress={handleOnPress}>
       <TextInput
         style={modalStyles.input}
         placeholder='Filter by name ...'
@@ -47,7 +47,7 @@ export const FilterEpisodesModal: React.FC<FilterEpisodesModalProps> = ({
             name: value,
           })
         }
-        defaultValue={name}
+        defaultValue={filters.name}
       />
       <TextInput
         style={modalStyles.input}
@@ -55,29 +55,11 @@ export const FilterEpisodesModal: React.FC<FilterEpisodesModalProps> = ({
         onChangeText={(value) =>
           setFilters({
             ...filters,
-            episode: value,
+            episodeCode: value,
           })
         }
-        defaultValue={episode}
+        defaultValue={filters.episodeCode}
       />
-      <Pressable style={styles.button} onPress={handleOnPress}>
-        <Text style={styles.textStyle}>Filter</Text>
-      </Pressable>
     </FilterModal>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    marginTop: 20,
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});

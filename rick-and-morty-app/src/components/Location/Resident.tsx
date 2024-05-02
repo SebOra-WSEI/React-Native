@@ -1,20 +1,14 @@
 import { Error } from '@/src/components/Error/Error';
+import { buttonColor, secondColor } from '@/src/constants/Colors';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { useGetPrevScreen } from '@/src/hooks/useGetPrevScreen';
 import { endpoints, routerBuilder } from '@/src/routes/routes';
-import { listStyles } from '@/src/styles/listStyles';
 import { Character } from '@/src/types/character';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import {
-  Text,
-  ActivityIndicator,
-  View,
-  Image,
-  StyleSheet,
-  Pressable,
-} from 'react-native';
+import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
 import { DataTable } from 'react-native-paper';
+import { ScreenLoader } from '../Loader/ScreenLoader';
 
 export const Resident: React.FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
@@ -27,11 +21,7 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
   );
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />;
   }
 
   if (error) {
@@ -49,9 +39,9 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
             }}
           >
             <Text style={styles.text}>{data?.name}</Text>
-            <Text style={listStyles.secondText}>Species: {data?.species}</Text>
-            <Text style={listStyles.secondText}>Status: {data?.status}</Text>
-            <Text style={listStyles.secondText}>Gender: {data?.gender}</Text>
+            <Text style={styles.secondText}>Species: {data?.species}</Text>
+            <Text style={styles.secondText}>Status: {data?.status}</Text>
+            <Text style={styles.secondText}>Gender: {data?.gender}</Text>
           </View>
         </View>
       </DataTable.Cell>
@@ -63,7 +53,7 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
                 router.navigate(routerBuilder.character(String(data?.id)))
               }
             >
-              <Text style={listStyles.filterText}>Details</Text>
+              <Text style={styles.filterText}>Details</Text>
             </Pressable>
           </View>
         </DataTable.Cell>
@@ -89,5 +79,11 @@ const styles = StyleSheet.create({
   },
   detailsButton: {
     marginLeft: 'auto',
+  },
+  secondText: {
+    color: secondColor,
+  },
+  filterText: {
+    color: buttonColor,
   },
 });

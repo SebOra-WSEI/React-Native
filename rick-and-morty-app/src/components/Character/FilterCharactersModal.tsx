@@ -1,4 +1,4 @@
-import { TextInput, StyleSheet, Pressable, Text } from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import {
@@ -60,7 +60,7 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
   };
 
   return (
-    <FilterModal isModalVisible={isModalVisible}>
+    <FilterModal isModalVisible={isModalVisible} handleOnPress={handleOnPress}>
       <RNPickerSelect
         style={pickerSelectStyles}
         onValueChange={(value) =>
@@ -124,27 +124,9 @@ export const FilterCharactersModal: React.FC<FilterCharactersModalProps> = ({
         }
         defaultValue={filters.type}
       />
-      <Pressable style={styles.button} onPress={handleOnPress}>
-        <Text style={styles.textStyle}>Filter</Text>
-      </Pressable>
     </FilterModal>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    marginTop: 20,
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {

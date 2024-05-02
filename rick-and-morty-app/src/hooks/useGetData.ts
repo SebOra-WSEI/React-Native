@@ -4,12 +4,14 @@ import { DefaultCharacterFilters } from '../types/character';
 import { DefaultLocationFilters } from '../types/location';
 import { DefaultEpisodeFilters } from '../types/episode';
 
-interface UseGetDataResult<T> {
-  loading: boolean;
-  error: string;
-  data: T;
-  hasNextPage: boolean;
-}
+type FilterName =
+  | 'name'
+  | 'species'
+  | 'status'
+  | 'gender'
+  | 'dimension'
+  | 'type'
+  | 'episode';
 
 interface useGetDataArgs {
   endpoint: string;
@@ -17,6 +19,13 @@ interface useGetDataArgs {
   characterFilters?: DefaultCharacterFilters;
   locationFilters?: DefaultLocationFilters;
   episodeFilters?: DefaultEpisodeFilters;
+}
+
+interface UseGetDataResult<T> {
+  loading: boolean;
+  error: string;
+  data: T;
+  hasNextPage: boolean;
 }
 
 export function useGetData<T>({
@@ -47,32 +56,18 @@ export function useGetData<T>({
 
   const { name: episodeName, episodeCode } = episodeFilters ?? {};
 
-  const nameQueryFilter =
-    characterName || locationName || episodeName
-      ? `&name=${characterName || locationName || episodeName}`
-      : '';
-  const speciesQueryFilter = species ? `&species=${species}` : '';
-  const statusQueryFilter = status ? `&status=${status}` : '';
-  const genderQueryFilter = gender ? `&gender=${gender}` : '';
-  const typeQueryFilter =
-    characterType || locationType
-      ? `&type=${characterType || locationType}`
-      : '';
-  const dimensionQueryFilter = dimension ? `&dimension=${dimension}` : '';
-  const episodeQueryFilter = episodeCode ? `&episode=${episodeCode}` : '';
-
   const fetchData = async (page: number) => {
-    await fetch(
-      `${endpoint}?page=
-      ${page}
-      ${nameQueryFilter}
-      ${statusQueryFilter}
-      ${genderQueryFilter}
-      ${typeQueryFilter}
-      ${speciesQueryFilter}
-      ${dimensionQueryFilter}
-      ${episodeQueryFilter}`
-    )
+    const filters = createUrl(
+      createUrlFilter('status', status),
+      createUrlFilter('gender', gender),
+      createUrlFilter('species', species),
+      createUrlFilter('dimension', dimension),
+      createUrlFilter('episode', episodeCode),
+      createUrlFilter('type', characterType || locationType),
+      createUrlFilter('name', characterName || locationName || episodeName)
+    );
+
+    await fetch(`${endpoint}?page=${page}${filters}`)
       .then((res) => res.json())
       .then((res: QueryResponse<T>) => {
         setHasNextPage(!!res?.info?.next);
@@ -115,4 +110,12 @@ export function useGetData<T>({
     data,
     hasNextPage,
   };
+}
+
+function createUrlFilter(filterName: FilterName, filterValue?: string): string {
+  return filterValue ? `&${filterName}=${filterValue}` : '';
+}
+
+function createUrl(...args: Array<string>): string {
+  return args.map((a) => a).join('');
 }

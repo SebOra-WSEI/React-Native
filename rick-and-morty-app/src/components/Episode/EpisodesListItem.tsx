@@ -1,5 +1,6 @@
+import { buttonColor } from '@/src/constants/Colors';
 import { routerBuilder } from '@/src/routes/routes';
-import { listStyles } from '@/src/styles/listStyles';
+import { listItemStyles } from '@/src/styles/list';
 import { Episode } from '@/src/types/episode';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -18,14 +19,14 @@ export const EpisodesListItem: React.FC<EpisodesListItemProps> = ({
   const { id, name, air_date, episode: e } = episode;
 
   return (
-    <View style={listStyles.view}>
+    <View style={listItemStyles.view}>
       <View>
         <FontAwesome name='file-movie-o' size={19} style={styles.episodeIcon} />
       </View>
       <View style={styles.itemView}>
-        <Text style={listStyles.name}>{name}</Text>
-        <Text style={listStyles.secondText}>{e}</Text>
-        <Text style={listStyles.secondText}>Air Date: {air_date}</Text>
+        <Text style={listItemStyles.name}>{name}</Text>
+        <Text style={listItemStyles.secondText}>{e}</Text>
+        <Text style={listItemStyles.secondText}>Air Date: {air_date}</Text>
       </View>
       <View style={styles.buttonView}>
         <Pressable
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    backgroundColor: '#2196F3',
+    backgroundColor: buttonColor,
   },
   buttonText: {
     color: '#fff',

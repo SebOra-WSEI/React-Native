@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import {
-  View,
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  Text,
-} from 'react-native';
+import { View, FlatList, Pressable, Text } from 'react-native';
 import { useGetData } from '../../hooks/useGetData';
 import { endpoints } from '../../routes/routes';
 import { Location } from '../../types/location';
 import { Error } from '../../components/Error/Error';
-import { ListLoader } from '../../components/ListLoader/ListLoader';
+import { ListLoader } from '../../components/Loader/ListLoader';
 import { LocationsListItem } from '../../components/Location/LocationsListItem';
-import { listStyles } from '../../styles/listStyles';
+import { listStyles } from '../../styles/list';
 import { FilterLocationsModal } from '../../components/Location/FilterLocationsModal';
+import { ScreenLoader } from '@/src/components/Loader/ScreenLoader';
 
 export default function LocationsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -29,11 +24,7 @@ export default function LocationsList() {
   });
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />;
   }
 
   if (error) {
