@@ -1,7 +1,7 @@
 # React Native App
 
 ### Rick and Morty API application
-Application written in React Native with the `expo` ecosystem. It's based on https://rickandmortyapi.com/documentation API documentation.
+Application written in React Native with the `expo` ecosystem. It's based on https://rickandmortyapi.com/documentation API.
 
 ## Screenshots
 <p>
