@@ -1,13 +1,12 @@
 import {
   View,
-  ActivityIndicator,
   FlatList,
   Pressable,
   Text,
 } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../../components/Character/CharactersListItem';
-import { ListLoader } from '../../components/ListLoader/ListLoader';
+import { ListLoader } from '../../components/Loader/ListLoader';
 import { Error } from '../../components/Error/Error';
 import { useGetData } from '../../hooks/useGetData';
 import {
@@ -18,6 +17,7 @@ import {
 import { FilterCharactersModal } from '../../components/Character/FilterCharactersModal';
 import { endpoints } from '../../routes/routes';
 import { listStyles } from '../../styles/list';
+import { ScreenLoader } from '@/src/components/Loader/ScreenLoader';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -35,11 +35,7 @@ export default function CharactersList() {
   });
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />;
   }
 
   if (error) {

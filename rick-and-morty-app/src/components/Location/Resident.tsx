@@ -3,19 +3,18 @@ import { buttonColor, secondColor } from '@/src/constants/Colors';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { useGetPrevScreen } from '@/src/hooks/useGetPrevScreen';
 import { endpoints, routerBuilder } from '@/src/routes/routes';
-import { listStyles } from '@/src/styles/list';
 import { Character } from '@/src/types/character';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import {
   Text,
-  ActivityIndicator,
   View,
   Image,
   StyleSheet,
   Pressable,
 } from 'react-native';
 import { DataTable } from 'react-native-paper';
+import { ScreenLoader } from '../Loader/ScreenLoader';
 
 export const Resident: React.FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
@@ -28,11 +27,7 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
   );
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />
   }
 
   if (error) {

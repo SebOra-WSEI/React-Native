@@ -1,8 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { endpoints } from '../../routes/routes';
-import { listStyles } from '../../styles/list';
 import { Error } from '../../components/Error/Error';
 import { useGetDataById } from '../../hooks/useGetDataById';
 import { Episode } from '@/src/types/episode';
@@ -13,6 +12,7 @@ import { detailsPageStyles } from '@/src/styles/details';
 import { CommonDetailsPage } from '@/src/components/Details/CommonDetailsPage';
 import { EPISODE_IMAGE_URL } from '@/src/constants/images';
 import { secondColor } from '@/src/constants/Colors';
+import { ScreenLoader } from '@/src/components/Loader/ScreenLoader';
 
 export default function LocationDetails() {
   const { id } = useLocalSearchParams();
@@ -23,11 +23,7 @@ export default function LocationDetails() {
   );
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />
   }
 
   if (error) {

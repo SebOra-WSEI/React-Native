@@ -1,9 +1,8 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { Text } from 'react-native';
 import { Character } from '../../types/character';
 import { endpoints } from '../../routes/routes';
-import { listStyles } from '../../styles/list';
 import { Error } from '../../components/Error/Error';
 import { useGetDataById } from '../../hooks/useGetDataById';
 import { DataTable } from 'react-native-paper';
@@ -12,6 +11,7 @@ import { TableTitle } from '@/src/components/Table/TableTitle';
 import { TableCell } from '@/src/components/Table/TableCell';
 import { detailsPageStyles } from '@/src/styles/details';
 import { CommonDetailsPage } from '@/src/components/Details/CommonDetailsPage';
+import { ScreenLoader } from '@/src/components/Loader/ScreenLoader';
 
 export default function CharacterDetails() {
   const { id } = useLocalSearchParams();
@@ -22,11 +22,7 @@ export default function CharacterDetails() {
   );
 
   if (loading) {
-    return (
-      <View style={listStyles.loader}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
+    return <ScreenLoader />
   }
 
   if (error) {
