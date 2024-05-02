@@ -2,7 +2,7 @@ import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { endpoints } from '../../routes/routes';
-import { listStyles } from '../../styles/listStyles';
+import { listStyles } from '../../styles/list';
 import { Error } from '../../components/Error/Error';
 import { useGetDataById } from '../../hooks/useGetDataById';
 import { Episode } from '@/src/types/episode';
@@ -12,6 +12,7 @@ import { Resident } from '@/src/components/Location/Resident';
 import { detailsPageStyles } from '@/src/styles/details';
 import { CommonDetailsPage } from '@/src/components/Details/CommonDetailsPage';
 import { EPISODE_IMAGE_URL } from '@/src/constants/images';
+import { secondColor } from '@/src/constants/Colors';
 
 export default function LocationDetails() {
   const { id } = useLocalSearchParams();
@@ -38,8 +39,8 @@ export default function LocationDetails() {
   return (
     <CommonDetailsPage imageUrl={EPISODE_IMAGE_URL}>
       <Text style={detailsPageStyles.name}>{name}</Text>
-      <Text style={listStyles.secondText}>{episode}</Text>
-      <Text style={listStyles.secondText}>{air_date}</Text>
+      <Text style={styles.secondText}>{episode}</Text>
+      <Text style={styles.secondText}>{air_date}</Text>
       <DataTable style={styles.dataTable}>
         <DataTable.Header>
           <TableTitle title='Characters' />
@@ -57,5 +58,8 @@ export default function LocationDetails() {
 const styles = StyleSheet.create({
   dataTable: {
     marginTop: 15,
+  },
+  secondText: {
+    color: secondColor,
   },
 });

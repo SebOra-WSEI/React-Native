@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { Character } from '../../types/character';
 import { endpoints } from '../../routes/routes';
-import { listStyles } from '../../styles/listStyles';
+import { listStyles } from '../../styles/list';
 import { Error } from '../../components/Error/Error';
 import { useGetDataById } from '../../hooks/useGetDataById';
 import { DataTable } from 'react-native-paper';

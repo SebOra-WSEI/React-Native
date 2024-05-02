@@ -16,7 +16,4 @@ export const detailsPageStyles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
   },
-  title: {
-    justifyContent: 'center',
-  },
 });

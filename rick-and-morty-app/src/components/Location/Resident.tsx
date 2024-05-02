@@ -1,8 +1,9 @@
 import { Error } from '@/src/components/Error/Error';
+import { buttonColor, secondColor } from '@/src/constants/Colors';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { useGetPrevScreen } from '@/src/hooks/useGetPrevScreen';
 import { endpoints, routerBuilder } from '@/src/routes/routes';
-import { listStyles } from '@/src/styles/listStyles';
+import { listStyles } from '@/src/styles/list';
 import { Character } from '@/src/types/character';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -49,9 +50,9 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
             }}
           >
             <Text style={styles.text}>{data?.name}</Text>
-            <Text style={listStyles.secondText}>Species: {data?.species}</Text>
-            <Text style={listStyles.secondText}>Status: {data?.status}</Text>
-            <Text style={listStyles.secondText}>Gender: {data?.gender}</Text>
+            <Text style={styles.secondText}>Species: {data?.species}</Text>
+            <Text style={styles.secondText}>Status: {data?.status}</Text>
+            <Text style={styles.secondText}>Gender: {data?.gender}</Text>
           </View>
         </View>
       </DataTable.Cell>
@@ -63,7 +64,7 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
                 router.navigate(routerBuilder.character(String(data?.id)))
               }
             >
-              <Text style={listStyles.filterText}>Details</Text>
+              <Text style={styles.filterText}>Details</Text>
             </Pressable>
           </View>
         </DataTable.Cell>
@@ -90,4 +91,10 @@ const styles = StyleSheet.create({
   detailsButton: {
     marginLeft: 'auto',
   },
+  secondText: {
+    color: secondColor,
+  },
+  filterText: {
+    color: buttonColor
+  }
 });

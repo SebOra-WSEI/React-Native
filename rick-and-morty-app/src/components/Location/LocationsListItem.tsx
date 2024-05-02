@@ -1,5 +1,6 @@
+import { buttonColor } from '@/src/constants/Colors';
 import { routerBuilder } from '@/src/routes/routes';
-import { listStyles } from '@/src/styles/listStyles';
+import { listItemStyles } from '@/src/styles/list';
 import { Location } from '@/src/types/location';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -18,7 +19,7 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
   const { id, name, type, dimension } = location;
 
   return (
-    <View style={listStyles.view}>
+    <View style={listItemStyles.view}>
       <View>
         <FontAwesome
           name='location-arrow'
@@ -27,9 +28,9 @@ export const LocationsListItem: React.FC<LocationsListItemProps> = ({
         />
       </View>
       <View>
-        <Text style={listStyles.name}>{name}</Text>
-        <Text style={listStyles.secondText}>Type: {type}</Text>
-        <Text style={listStyles.secondText}>Dimension: {dimension}</Text>
+        <Text style={listItemStyles.name}>{name}</Text>
+        <Text style={listItemStyles.secondText}>Type: {type}</Text>
+        <Text style={listItemStyles.secondText}>Dimension: {dimension}</Text>
       </View>
       <View style={styles.buttonView}>
         <Pressable
@@ -51,13 +52,13 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    backgroundColor: '#2196F3',
+    backgroundColor: buttonColor,
   },
   buttonText: {
     color: '#fff',
   },
   locationIcon: {
-    color: '#2196F3',
+    color: buttonColor,
     marginRight: 10,
     marginVertical: 2,
   },

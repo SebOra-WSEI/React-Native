@@ -1,5 +1,6 @@
 import { View, Modal, StyleSheet, Pressable, Text } from 'react-native';
 import React, { PropsWithChildren } from 'react';
+import { buttonColor } from '@/src/constants/Colors';
 
 interface FilterModalProps extends PropsWithChildren {
   isModalVisible: boolean;
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     marginTop: 20,
-    backgroundColor: '#2196F3',
+    backgroundColor: buttonColor,
   },
   textStyle: {
     color: 'white',

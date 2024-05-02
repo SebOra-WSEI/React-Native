@@ -1,9 +1,10 @@
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 import { Character } from '@/src/types/character';
-import { listStyles } from '@/src/styles/listStyles';
+import { listItemStyles } from '@/src/styles/list';
 import { useRouter } from 'expo-router';
 import { routerBuilder } from '@/src/routes/routes';
+import { buttonColor } from '@/src/constants/Colors';
 
 interface FlatListItemProps {
   character?: Character;
@@ -17,14 +18,14 @@ export const CharactersListItem: React.FC<FlatListItemProps> = ({
   const { id, image, name, species, status, gender, type } = character ?? {};
 
   return (
-    <View style={listStyles.view}>
+    <View style={listItemStyles.view}>
       <Image style={styles.img} source={{ uri: image }} />
       <View>
-        <Text style={listStyles.name}>{name}</Text>
-        <Text style={listStyles.secondText}>Species: {species}</Text>
-        <Text style={listStyles.secondText}>Status: {status}</Text>
-        <Text style={listStyles.secondText}>Gender: {gender}</Text>
-        <Text style={listStyles.secondText}>Type: {type || '-'}</Text>
+        <Text style={listItemStyles.name}>{name}</Text>
+        <Text style={listItemStyles.secondText}>Species: {species}</Text>
+        <Text style={listItemStyles.secondText}>Status: {status}</Text>
+        <Text style={listItemStyles.secondText}>Gender: {gender}</Text>
+        <Text style={listItemStyles.secondText}>Type: {type || '-'}</Text>
       </View>
       <View style={styles.buttonView}>
         <Pressable
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    backgroundColor: '#2196F3',
+    backgroundColor: buttonColor,
   },
   buttonText: {
     color: '#fff',

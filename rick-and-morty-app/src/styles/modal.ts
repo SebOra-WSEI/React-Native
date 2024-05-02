@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { secondColor } from '../constants/Colors';
 
 export const modalStyles = StyleSheet.create({
   input: {
@@ -9,6 +10,6 @@ export const modalStyles = StyleSheet.create({
     paddingVertical: 10,
     marginVertical: 5,
     fontSize: 14,
-    borderColor: '#777',
+    borderColor: secondColor,
   },
 });

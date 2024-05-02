@@ -17,7 +17,7 @@ import {
 } from '../../types/character';
 import { FilterCharactersModal } from '../../components/Character/FilterCharactersModal';
 import { endpoints } from '../../routes/routes';
-import { listStyles } from '../../styles/listStyles';
+import { listStyles } from '../../styles/list';
 
 export default function CharactersList() {
   const [currentPage, setCurrentPage] = useState<number>(1);

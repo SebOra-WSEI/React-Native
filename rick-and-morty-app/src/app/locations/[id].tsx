@@ -7,7 +7,7 @@ import { LOCATION_IMAGE_URL } from '@/src/constants/images';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { endpoints } from '@/src/routes/routes';
 import { detailsPageStyles } from '@/src/styles/details';
-import { listStyles } from '@/src/styles/listStyles';
+import { listStyles } from '@/src/styles/list';
 import { Location } from '@/src/types/location';
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';

@@ -13,14 +13,6 @@ export interface Character {
   created: string;
 }
 
-export enum CharacterFilters {
-  Name = 'name',
-  Status = 'status',
-  Species = 'species',
-  Type = 'type',
-  Gender = 'gender',
-}
-
 export enum CharacterStatus {
   Alive = 'alive',
   Dead = 'dead',
@@ -34,13 +26,6 @@ export enum CharacterGender {
   Unknown = 'unknown',
 }
 
-interface Origin {
-  name: string;
-  url: string;
-}
-
-type Location = Origin;
-
 export interface DefaultCharacterFilters {
   status: CharacterStatus | undefined;
   gender: CharacterGender | undefined;
@@ -48,3 +33,10 @@ export interface DefaultCharacterFilters {
   species: string;
   type: string;
 }
+
+interface Origin {
+  name: string;
+  url: string;
+}
+
+type Location = Origin;

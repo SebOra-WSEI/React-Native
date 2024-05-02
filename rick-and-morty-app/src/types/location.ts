@@ -8,8 +8,7 @@ export interface Location {
   created: string;
 }
 
-export interface DefaultLocationFilters {
-  name: string;
-  type: string;
-  dimension: string;
-}
+export type DefaultLocationFilters = Pick<
+  Location,
+  'name' | 'type' | 'dimension'
+>;

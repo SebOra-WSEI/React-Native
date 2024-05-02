@@ -12,7 +12,7 @@ import { Location } from '../../types/location';
 import { Error } from '../../components/Error/Error';
 import { ListLoader } from '../../components/ListLoader/ListLoader';
 import { LocationsListItem } from '../../components/Location/LocationsListItem';
-import { listStyles } from '../../styles/listStyles';
+import { listStyles } from '../../styles/list';
 import { FilterLocationsModal } from '../../components/Location/FilterLocationsModal';
 
 export default function LocationsList() {
