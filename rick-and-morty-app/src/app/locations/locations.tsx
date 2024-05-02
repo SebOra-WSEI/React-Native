@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  FlatList,
-  Pressable,
-  Text,
-} from 'react-native';
+import { View, FlatList, Pressable, Text } from 'react-native';
 import { useGetData } from '../../hooks/useGetData';
 import { endpoints } from '../../routes/routes';
 import { Location } from '../../types/location';
@@ -29,7 +24,7 @@ export default function LocationsList() {
   });
 
   if (loading) {
-    return <ScreenLoader />
+    return <ScreenLoader />;
   }
 
   if (error) {

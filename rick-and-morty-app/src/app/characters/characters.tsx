@@ -1,9 +1,4 @@
-import {
-  View,
-  FlatList,
-  Pressable,
-  Text,
-} from 'react-native';
+import { View, FlatList, Pressable, Text } from 'react-native';
 import React, { useState } from 'react';
 import { CharactersListItem } from '../../components/Character/CharactersListItem';
 import { ListLoader } from '../../components/Loader/ListLoader';

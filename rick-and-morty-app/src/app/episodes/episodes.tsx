@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  FlatList,
-} from 'react-native';
+import { View, Text, Pressable, FlatList } from 'react-native';
 import { endpoints } from '../../routes/routes';
 import { useGetData } from '../../hooks/useGetData';
 import { Episode } from '../../types/episode';
@@ -28,7 +23,7 @@ export default function EpisodesList() {
   });
 
   if (loading) {
-    return <ScreenLoader />
+    return <ScreenLoader />;
   }
 
   if (error) {

@@ -22,7 +22,7 @@ export default function CharacterDetails() {
   );
 
   if (loading) {
-    return <ScreenLoader />
+    return <ScreenLoader />;
   }
 
   if (error) {

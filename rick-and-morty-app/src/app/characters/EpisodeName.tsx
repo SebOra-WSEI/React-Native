@@ -2,12 +2,7 @@ import { Error } from '@/src/components/Error/Error';
 import { useGetDataById } from '@/src/hooks/useGetDataById';
 import { endpoints, routerBuilder } from '@/src/routes/routes';
 import React from 'react';
-import {
-  View,
-  Pressable,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import { View, Pressable, Text, StyleSheet } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { Episode } from '@/src/types/episode';
 import { useRouter } from 'expo-router';
@@ -26,7 +21,7 @@ export const EpisodeName: React.FC<{ id: string }> = ({ id }) => {
   );
 
   if (loading) {
-    return <ScreenLoader />
+    return <ScreenLoader />;
   }
 
   if (error) {
@@ -58,6 +53,6 @@ export const styles = StyleSheet.create({
     marginLeft: 'auto',
   },
   filterText: {
-    color: buttonColor
-  }
+    color: buttonColor,
+  },
 });

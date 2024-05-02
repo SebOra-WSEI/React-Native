@@ -23,7 +23,7 @@ export default function LocationDetails() {
   );
 
   if (loading) {
-    return <ScreenLoader />
+    return <ScreenLoader />;
   }
 
   if (error) {

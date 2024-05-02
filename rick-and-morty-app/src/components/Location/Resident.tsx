@@ -6,13 +6,7 @@ import { endpoints, routerBuilder } from '@/src/routes/routes';
 import { Character } from '@/src/types/character';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  Pressable,
-} from 'react-native';
+import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { ScreenLoader } from '../Loader/ScreenLoader';
 
@@ -27,7 +21,7 @@ export const Resident: React.FC<{ id: string }> = ({ id }) => {
   );
 
   if (loading) {
-    return <ScreenLoader />
+    return <ScreenLoader />;
   }
 
   if (error) {
@@ -90,6 +84,6 @@ const styles = StyleSheet.create({
     color: secondColor,
   },
   filterText: {
-    color: buttonColor
-  }
+    color: buttonColor,
+  },
 });
